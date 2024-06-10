@@ -1,0 +1,12 @@
+CREATE DATABASE cashstashDB;
+
+USE cashstashDB;
+
+CREATE TABLE user_account (
+	id INT auto_increment PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+)
+
+SELECT * FROM user_account;
