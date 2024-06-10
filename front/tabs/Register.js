@@ -2,36 +2,33 @@ import React, { useState } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { styles } from '../styles/loginStyle.js';
-import axios from 'axios';
+import { api } from "../services/api";
 
 export default function MenuScreen({ navigation }) {
-  const [nome, setNome] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
 
   const loginPress = () => {
     navigation.navigate('Login');
   };
 
-  const handleRegister = () => {
-    if (senha !== confirmarSenha) {
+
+  const handleSubmit = async (e) => {
+    if (password !== password2) {
       alert('As senhas não coincidem');
       return;
     }
 
-    axios.post('http://localhost:3000/register', {
-      nome,
+    e.preventDefault();
+    const data = {
+      name,
       email,
-      senha,
-    })
-    .then(response => {
-      alert(response.data);
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Erro ao registrar');
-    });
+      password,
+    };
+    await api.post("/user/create", data);
+    alert("Usuário criado com sucesso!");
   };
 
   return (
@@ -63,8 +60,8 @@ export default function MenuScreen({ navigation }) {
               style={styles.inputControl}
               placeholder='Seu Nome'
               placeholderTextColor={'white'}
-              value={nome}
-              onChangeText={setNome}
+              value={name}
+              onChangeText={setName}
             />
           </View>
 
@@ -86,8 +83,8 @@ export default function MenuScreen({ navigation }) {
               placeholder='Crie sua senha'
               placeholderTextColor={'white'}
               secureTextEntry
-              value={senha}
-              onChangeText={setSenha}
+              value={password}
+              onChangeText={setPassword}
             />
           </View>
 
@@ -98,13 +95,13 @@ export default function MenuScreen({ navigation }) {
               placeholder='Confirme sua senha'
               placeholderTextColor={'white'}
               secureTextEntry
-              value={confirmarSenha}
-              onChangeText={setConfirmarSenha}
+              value={password2}
+              onChangeText={setPassword2}
             />
           </View>
 
           <View style={styles.formAction}>
-            <TouchableOpacity onPress={handleRegister}>
+            <TouchableOpacity onPress={handleSubmit}>
               <View style={styles.btn}>
                 <Text style={styles.btnText}>Criar Conta</Text>
               </View>

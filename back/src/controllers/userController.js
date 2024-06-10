@@ -20,7 +20,7 @@ const bcrypt = require('bcrypt');
 // Função que retorna todos usuários no banco de dados
 async function listUsers(request, response) {
     // Preparar o comando de execução no banco
-    connection.query('SELECT * FROM users', (resultserr, ) => { 
+    connection.query('SELECT * FROM user_account', (resultserr, ) => { 
         try {  // Tenta retornar as solicitações requisitadas
             if (results) {  // Se tiver conteúdo 
                 response.status(200).json({
@@ -52,7 +52,7 @@ async function listUsers(request, response) {
 // Função que cria um novo usuário 
 async function storeUser(request, response) {
     // Preparar o comando de execução no banco
-    const query = 'INSERT INTO users(name, email, password, status) VALUES(?, ?, ?, ?);';
+    const query = 'INSERT INTO user_account(name, email, password) VALUES(?, ?, ?);';
 
     // Recuperar os dados enviados na requisição
     const params = Array(
@@ -94,96 +94,9 @@ async function storeUser(request, response) {
     });
 }
 
-// Função que atualiza o usuário no banco
-async function updateUser(request, response) {
-    // Preparar o comando de execução no banco
-    const query = "UPDATE users SET `ds_nome` = ?, `ds_password` = ?, `fl_status` = ? WHERE `id_user` = ?";
-
-    // Recuperar os dados enviados na requisição respectivamente
-    const params = Array(
-        request.body.ds_nome,
-        bcrypt.hashSync(request.body.ds_password, 10),
-        request.body.fl_status,
-        request.params.id  // Recebimento de parametro da rota
-    );
-
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
-    connection.query(query, params, (err, results) => {
-        try {
-            if (results) {
-                response
-                    .status(200)
-                    .json({
-                        success: true,
-                        message: `Sucesso! Usuário atualizado.`,
-                        data: results
-                    });
-            } else {
-                response
-                    .status(400)
-                    .json({
-                        success: false,
-                        message: `Não foi possível realizar a atualização. Verifique os dados informados`,
-                        query: err.sql,
-                        sqlMessage: err.sqlMessage
-                    });
-            }
-        } catch (e) { // Caso aconteça algum erro na execução
-            response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível atualizar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
-        }
-    });
-}
-
-// Função que remove usuário no banco
-async function deleteUser(request, response) {
-    // Preparar o comando de execução no banco
-    const query = "DELETE FROM users WHERE `id_user` = ?";
-
-    // Recebimento de parametro da rota
-    const params = Array(
-        request.params.id
-    );
-
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
-    connection.query(query, params, (err, results) => {
-        try {
-            if (results) {
-                response
-                    .status(200)
-                    .json({
-                        success: true,
-                        message: `Sucesso! Usuário deletado.`,
-                        data: results
-                    });
-            } else {
-                response
-                    .status(400)
-                    .json({
-                        success: false,
-                        message: `Não foi possível realizar a remoção. Verifique os dados informados`,
-                        query: err.sql,
-                        sqlMessage: err.sqlMessage
-                    });
-            }
-        } catch (e) { // Caso aconteça algum erro na execução
-            response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível deletar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
-        }
-    });
-}
 
 module.exports = {
     listUsers,
     storeUser,
-    updateUser,
-    deleteUser
+
 }
