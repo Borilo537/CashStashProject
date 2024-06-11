@@ -8,7 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
-export default function MenuScreen({ navigation }) {
+export default function Limit() {
   const homePress = () => {
     navigation.navigate('Home');
   };

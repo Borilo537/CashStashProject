@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import { styles } from '../styles/editLimitStyle';
 
-export default function MenuScreen({ navigation }) {
+export default function EditLimit() {
     const homePress = () => {
         navigation.navigate('Home');
     };

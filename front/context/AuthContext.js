@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { api } from "../services/api";
 
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -43,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   const singOut = () => {
     localStorage.clear();
     setUser(null);
-    return <Navigate to="/" />;
+    ('out')
   };
 
   return (

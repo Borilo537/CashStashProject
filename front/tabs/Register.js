@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { styles } from '../styles/loginStyle.js';
 import { api } from "../services/api";
 
-export default function MenuScreen({ navigation }) {
+export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

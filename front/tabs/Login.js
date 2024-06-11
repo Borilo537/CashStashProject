@@ -1,22 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/loginStyle.js';
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 
-export default function MenuScreen({ navigation }) {
+export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signIn, signed } = useContext(AuthContext);
 
-
   const registerPress = () => {
     navigation.navigate('Register');
   };
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,6 +106,6 @@ export default function MenuScreen({ navigation }) {
 
     )
   } else {
-    alert('voce loggou!!!')
+    console.log('voce loggou!!!')
   }
 }
