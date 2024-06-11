@@ -5,7 +5,7 @@ import { styles } from '../styles/menuStyle';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Menu() {
+export default function Menu({ navigation }) {
     const homePress = () => {
         navigation.navigate('Home');
     };

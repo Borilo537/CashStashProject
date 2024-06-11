@@ -2,29 +2,45 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useContext } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/loginStyle.js';
-import { AuthContext } from "../context/AuthContext";
 
-
-export default function Login() {
+export default function Login({ navigation }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn, signed } = useContext(AuthContext);
 
   const registerPress = () => {
     navigation.navigate('Register');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+
+  const handleSubmit = async function() {
+    console.log('email:', email, 'senha:', password)
+    // e.preventDefault();
     const data = {
       email,
       password,
     };
-    await signIn(data);
+    const response = await fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
+      headers: { "Content-type": "application/json;charset=UTF-8" },
+      body: JSON.stringify(data)
+    })
+
+    
+
+    let content = await response.json();
+    
+    if (content.success) {
+      alert(content.message);
+      navigation.navigate('Home');
+
+    }else{
+      alert(content.message);
+    }
+    
   };
-  console.log(signed);
-  if (!signed) {
+  
     return (
 
       <View style={styles.body}>
@@ -81,6 +97,7 @@ export default function Login() {
 
             <View style={styles.formAction}>
               <TouchableOpacity onPress={handleSubmit}>
+                
                 <View style={styles.btn}>
                   <Text style={styles.btnText}>Entrar</Text>
                 </View>
@@ -105,7 +122,5 @@ export default function Login() {
       </View>
 
     )
-  } else {
-    console.log('voce loggou!!!')
-  }
+  
 }

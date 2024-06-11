@@ -40,7 +40,7 @@ async function listUsers(request, response) {
             }
         } catch (e) {  // Caso aconteça qualquer erro no processo na requisição, retorna uma mensagem amigável
             response.status(400).json({
-                succes: false,
+                success: false,
                 message: "Ocorreu um erro. Não foi possível realizar sua requisição!",
                 query: err.sql,
                 sqlMessage: err.sqlMessage
@@ -58,7 +58,7 @@ async function storeUser(request, response) {
     const params = Array(
         request.body.name,
         request.body.email,
-        bcrypt.hashSync(request.body.password, 10),
+        request.body.password,
         request.body.status
     );
 

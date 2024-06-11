@@ -8,7 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
-export default function Limit() {
+export default function Limit({ navigation }) {
   const homePress = () => {
     navigation.navigate('Home');
   };
@@ -62,7 +62,7 @@ export default function Limit() {
             <TouchableOpacity onPress={handlePress}>
               <View style={styles.analiseContainer}>
                 <Text style={styles.analiseLabel}>Análise</Text>
-                <ImageBackground source={require('../assets/arrow.png')} style={styles.analiseArrow}></ImageBackground>
+                
               </View>
             </TouchableOpacity>
           </View>
