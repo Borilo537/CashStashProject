@@ -36,6 +36,7 @@ export default function Login({ navigation }) {
       navigation.navigate('Home');
 
     }else{
+      console.log('ERROOO')
       alert(content.message);
     }
     

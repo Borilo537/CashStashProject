@@ -14,8 +14,6 @@
 // Importa as configurações do banco de dados na variável connection
 const connection = require('../config/db');
 
-// Pacote para criptografar a senha de usuario
-const bcrypt = require('bcrypt');
 
 // Função que retorna todos usuários no banco de dados
 async function listUsers(request, response) {
