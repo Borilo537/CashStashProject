@@ -1,20 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/editLimitStyle';
 import { api } from "../services/api";
 
+let a = 0
+
 export default function EditLimit({ navigation }) {
     const [limite, setLimite] = useState('');
+    const [showLimite, setShowLimite] = useState(0);
 
+    useEffect(() => {
+        api.get('/limit/select').then((res) => {
+            setShowLimite(res.data.data);
+        })
+    }, [])
     const handleSubmit = async (e) => {
     
         e.preventDefault();
         const data = {
           limite
         };
+
+
         await api.post("/limit/update", data);
-        alert("Limite atualizado!");
+
+        setShowLimite(limite)
+  
       };
 
     const limitPress = () => {
@@ -55,7 +67,8 @@ export default function EditLimit({ navigation }) {
 
                     <View style={styles.limitContainer}>
                         <Text style={styles.limitLabel}>valor atual</Text>
-                        <Text style={styles.limit}>720</Text>
+                        
+                        <Text style={styles.limit}>{showLimite}</Text>
 
                         <TouchableOpacity  onPress={handleSubmit}>
                             <View style={styles.btn}>
