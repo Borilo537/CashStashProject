@@ -12,17 +12,24 @@ CREATE TABLE user_account (
 SELECT * FROM user_account;
 
 CREATE TABLE limite (
-	valor INT NOT NULL
+	valor INT NOT NULL,
+	email VARCHAR(255) NOT NULL UNIQUE
 );
 
 INSERT INTO limite (valor) VALUE (0);
 
 SELECT * FROM limite;
 
+update limite set valor = 200 where email = 'a@a.com';
+
+insert into user_account(id,name,email,password) values(1,'paulo','paulo@e.com','1234');
+
 CREATE TABLE gastos (
 	gastado INT NOT NULL
 );
 
-INSERT INTO gastos (gastado) VALUE (0);
+INSERT INTO gastos (gastado) VALUE (5);
 
 SELECT * FROM gastos;
+
+UPDATE gastos SET gastado = 5;

@@ -41,7 +41,7 @@ export default function Home() {
 
 
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation, route }) {
 
   const registerPress = () => {
     navigation.navigate('Register');
@@ -56,7 +56,7 @@ function HomeScreen({ navigation }) {
   };
 
   const limitPress = () => {
-    navigation.navigate('Limit');
+    navigation.navigate('Limit', {emailP2: route.params.emailP});
   };
 
   const addPress = () => {

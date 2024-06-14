@@ -4,14 +4,17 @@ import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextI
 import { styles } from '../styles/editLimitStyle';
 import { api } from "../services/api";
 
-export default function EditLimit({ navigation }) {
+export default function EditLimit({ navigation, route }) {
     const [limite, setLimite] = useState('');
+    const [emailLogin, setEmailLogin] = useState(route.params.emailP3)
     const [showLimite, setShowLimite] = useState(0);
 
     useEffect(() => {
         api.get('/limit/select').then((res) => {
             setShowLimite(res.data.data);
+            // console.log(showLimite)
         })
+
     }, [])
     
     const handleSubmit = async (e) => {
@@ -19,6 +22,7 @@ export default function EditLimit({ navigation }) {
         e.preventDefault();
         const data = {
             limite
+ 
         };
 
 
@@ -35,6 +39,8 @@ export default function EditLimit({ navigation }) {
     const handlePress = () => {
         Linking.openURL('https://exemplo.com');
     };
+
+    console.log(emailLogin)
 
     return (
 

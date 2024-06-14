@@ -1,19 +1,18 @@
 
-
-// Importa as configurações do banco de dados na variável connection
 const connection = require('../config/db');
 
 
 async function updateLimit(request, response) {
-    const query = 'UPDATE limite SET valor = ?;';
+    // const query = 'update limite set valor = ? where email = ?';
+    const query = 'update limite set valor = ? where email = ?';
 
 
-    // Recuperar os dados enviados na requisição
     const params = Array(
         request.body.limite,
+        request.body.emailLogin,
     );
 
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
+    
     connection.query(query, params, (err, results) => {
         try {
             if (results) {

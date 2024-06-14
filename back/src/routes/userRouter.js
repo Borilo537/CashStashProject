@@ -11,12 +11,10 @@ const router = Router();
 
 // Importar as funções (processamento da requisição) do controller
 const { 
-    listUsers,
     storeUser,
 } = require('../controllers/userController')
 
 // Criar os endpoints (rotas) que serão acessados a partir dos métodos HTTP (get,post,put,delete)
-router.get('/users', listUsers);
 router.post('/user/create', storeUser);
 // router.put('/user/:id', updateUser);
 // router.delete('/user/:id', deleteUser);

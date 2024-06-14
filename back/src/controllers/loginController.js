@@ -1,9 +1,9 @@
-// Importa as configurações do banco de dados na variável connection
+
 const connection = require('../config/db');
-// Importar o pacote dotenv, gerenciador de variáveis de ambiente
+
 require("dotenv").config();
 
-// Authentication
+
 async function login(request, response) {
 
     const params = Array(
@@ -13,9 +13,7 @@ async function login(request, response) {
     const query = "SELECT * FROM user_account WHERE email = ?";
     console.log("params", params)
 
-    // Recuperar credenciais informada
-
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
+   
     connection.query(query, params, (err, results) => {
         console.log("BODY PASSWORD", request.body.password == results[0].password)
         try {       
@@ -50,7 +48,7 @@ async function login(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { // Caso aconteça algum erro na execução
+        } catch (e) {
             response.status(400).json({
                     succes: false,
                     message: "Ocorreu um erro. Não foi possível deletar usuário!",

@@ -9,7 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
-export default function Limit({ navigation }) {
+export default function Limit({ navigation, route }) {
 
   const [showLimite, setShowLimite] = useState(0);
 
@@ -24,13 +24,15 @@ export default function Limit({ navigation }) {
   };
 
   const editPress = () => {
-    navigation.navigate('EditLimit');
+    navigation.navigate('EditLimit', {emailP3: route.params.emailP2});
   };
 
   const handlePress = () => {
     console.log('wvwqv')
     setShowLimite(showLimite)
   };
+
+  console.log(route.params.emailP)
 
   return (
 

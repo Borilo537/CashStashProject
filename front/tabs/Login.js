@@ -33,7 +33,7 @@ export default function Login({ navigation }) {
     
     if (content.success) {
       alert(content.message);
-      navigation.navigate('Home');
+      navigation.navigate('Home', {emailP: email});
 
     }else{
       console.log('ERROOO')

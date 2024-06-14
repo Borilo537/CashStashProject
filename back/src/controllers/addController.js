@@ -15,11 +15,11 @@ async function updateGastos(request, response) {
                     .status(201)
                     .json({
                         success: true,
-                        message: `gasto enviado!`,
+                        message: 'gasto enviado!',
                         data: results
                     });
             } else {
-                console.log("erro enviando")
+                console.log("erro enviando add controler")
                 response
                     .status(400)
                     .json({
@@ -32,7 +32,7 @@ async function updateGastos(request, response) {
         } catch (e) { 
             console.log("erro total")
             response.status(400).json({
-                    succes: false,
+                    success: false,
                     message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
                     query: err.sql,
                     sqlMessage: err.sqlMessage
@@ -45,7 +45,7 @@ async function updateGastos(request, response) {
 async function selectGastos(request, response) {
     const query = 'SELECT * FROM gastos;';
 
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
+    
     connection.query(query, (err, results) => {
         try {
             if (results) {
@@ -69,9 +69,9 @@ async function selectGastos(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { // Caso aconteça algum erro na execução
+        } catch (e) {
             response.status(400).json({
-                    succes: false,
+                    success: false,
                     message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
                     query: err.sql,
                     sqlMessage: err.sqlMessage

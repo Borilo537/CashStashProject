@@ -7,24 +7,31 @@ import { api } from "../services/api";
 
 
 export default function Add({ navigation }) {
-    const [gasto, setGasto] = useState('');
+    const [gasto, setGasto] = useState(0);
     const [showGasto, setShowGasto] = useState(0);
+    let dados = 0
 
-    useEffect(() => {
-        api.get('/gastos/select').then((res) => {
-            setShowGasto(res.data.data + gasto);
-        })
-    }, [])
+    api.get('/gastos/select').then((res) => {
+        console.log('resposta',res.data.data)
+        dados = res.data.data + gasto
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+
+    })
+
+
+
+    const handleSubmit = async () => {
+
+
+        
+
         alert('Gasto Adicionado!')
-        console.log(showGasto)
 
-        setShowGasto(showGasto)
+
+        // let newGasto = showGasto+gasto
         const data = {
-            showGasto
+            gasto
         };
 
         await api.post("/gastos/update", data);
