@@ -7,6 +7,22 @@ CREATE TABLE user_account (
     name VARCHAR(255),
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
-)
+);
 
 SELECT * FROM user_account;
+
+CREATE TABLE limite (
+	valor INT NOT NULL
+);
+
+INSERT INTO limite (valor) VALUE (0);
+
+SELECT * FROM limite;
+
+CREATE TABLE gastos (
+	gastado INT NOT NULL
+);
+
+INSERT INTO gastos (gastado) VALUE (0);
+
+SELECT * FROM gastos;

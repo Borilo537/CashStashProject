@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import { styles } from '../styles/limitStyle';
+import { api } from "../services/api";
 
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -9,19 +10,31 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 
 export default function Limit({ navigation }) {
+
+  const [showLimite, setShowLimite] = useState(0);
+
+  useEffect(() => {
+    api.get('/limit/select').then((res) => {
+      setShowLimite(res.data.data);
+    })
+  }, [])
+
   const homePress = () => {
     navigation.navigate('Home');
   };
 
   const editPress = () => {
     navigation.navigate('EditLimit');
-};
+  };
 
   const handlePress = () => {
-    Linking.openURL('https://exemplo.com');
+    console.log('wvwqv')
+    setShowLimite(showLimite)
   };
 
   return (
+
+
 
     <View style={styles.body}>
 
@@ -30,12 +43,12 @@ export default function Limit({ navigation }) {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
         <View style={styles.header}>
-        <View style={styles.topContentIcons}>
-                <TouchableOpacity onPress={homePress}>
-                <AntDesign name="left" size={25} color="white" />
-                </TouchableOpacity>
-                <MaterialIcons name="account-circle" size={35} color="white" />
-            </View>
+          <View style={styles.topContentIcons}>
+            <TouchableOpacity onPress={homePress}>
+              <AntDesign name="left" size={25} color="white" />
+            </TouchableOpacity>
+            <MaterialIcons name="account-circle" size={35} color="white" />
+          </View>
 
           <TouchableOpacity onPress={editPress}>
             <View style={styles.limitTextContainer}>
@@ -46,7 +59,7 @@ export default function Limit({ navigation }) {
 
           <View style={styles.limitValueContainer}>
             <Text style={styles.limitValueLabel}>R$</Text>
-            <Text style={styles.limitValue}>720</Text>
+            <Text style={styles.limitValue}>{showLimite}</Text>
             <Text style={styles.limitValueLabel}>,00</Text>
           </View>
 
@@ -62,7 +75,7 @@ export default function Limit({ navigation }) {
             <TouchableOpacity onPress={handlePress}>
               <View style={styles.analiseContainer}>
                 <Text style={styles.analiseLabel}>Análise</Text>
-                
+
               </View>
             </TouchableOpacity>
           </View>

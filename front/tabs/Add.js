@@ -1,35 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
-import { styles } from '../styles/editLimitStyle';
+import { styles } from '../styles/addStyle';
 import { api } from "../services/api";
 
-export default function EditLimit({ navigation }) {
-    const [limite, setLimite] = useState('');
-    const [showLimite, setShowLimite] = useState(0);
+
+
+export default function Add({ navigation }) {
+    const [gasto, setGasto] = useState('');
+    const [showGasto, setShowGasto] = useState(0);
 
     useEffect(() => {
-        api.get('/limit/select').then((res) => {
-            setShowLimite(res.data.data);
+        api.get('/gastos/select').then((res) => {
+            setShowGasto(res.data.data + gasto);
         })
     }, [])
-    
-    const handleSubmit = async (e) => {
 
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        alert('Gasto Adicionado!')
+        console.log(showGasto)
+
+        setShowGasto(showGasto)
         const data = {
-            limite
+            showGasto
         };
 
-
-        await api.post("/limit/update", data);
-
-        setShowLimite(limite)
-
+        await api.post("/gastos/update", data);
     };
 
-    const limitPress = () => {
-        navigation.navigate('Limit');
+    const homePress = () => {
+        navigation.navigate('Home');
     };
 
     const handlePress = () => {
@@ -45,33 +47,32 @@ export default function EditLimit({ navigation }) {
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
 
-                <TouchableOpacity onPress={limitPress}>
+                <TouchableOpacity onPress={homePress}>
                     <ImageBackground source={require('../assets/arrow.png')} style={styles.voltar}></ImageBackground>
                 </TouchableOpacity>
 
 
                 <View style={styles.header}>
                     <View style={styles.input}>
-                        <Text style={styles.inputLabel}>Mudar limite de gastos</Text>
+                        <Text style={styles.inputLabel}>Adicionar gasto</Text>
 
                         <TextInput
                             style={styles.inputControl}
-                            placeholder='Ex: 500'
+                            placeholder='Ex: 15,00'
                             placeholderTextColor={'white'}
-                            value={limite}
-                            onChangeText={setLimite}
+                            value={gasto}
+                            onChangeText={setGasto}
                         />
+
+                        <Text style={styles.inputExtra}>R$ 0,00 gastos de R$ 200</Text>
 
                     </View>
 
                     <View style={styles.limitContainer}>
-                        <Text style={styles.limitLabel}>valor atual</Text>
-
-                        <Text style={styles.limit}>R$ {showLimite}</Text>
 
                         <TouchableOpacity onPress={handleSubmit}>
                             <View style={styles.btn}>
-                                <Text style={styles.btnText}>Salvar</Text>
+                                <Text style={styles.btnText}>Adicionar</Text>
                             </View>
                         </TouchableOpacity>
 

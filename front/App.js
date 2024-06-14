@@ -15,6 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Login from './tabs/Login';
 import Register from './tabs/Register';
 import Menu from './tabs/Menu';
+import Add from './tabs/Add';
 import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
 
@@ -25,9 +26,10 @@ const Stack = createStackNavigator();
 export default function Home() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="EditLimit">
+      <Stack.Navigator initialRouteName="Add">
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Menu" component={Menu} options={{ headerShown: false }} />
+        <Stack.Screen name="Add" component={Add} options={{ headerShown: false }} />
         <Stack.Screen name="Limit" component={Limit} options={{ headerShown: false }} />
         <Stack.Screen name="EditLimit" component={EditLimit} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -56,6 +58,11 @@ function HomeScreen({ navigation }) {
   const limitPress = () => {
     navigation.navigate('Limit');
   };
+
+  const addPress = () => {
+    navigation.navigate('Add');
+  };
+
 
   const handlePress = () => {
     Linking.openURL('https://exemplo.com');
@@ -86,8 +93,8 @@ function HomeScreen({ navigation }) {
             <TouchableOpacity onPress={limitPress}>
               <Text style={styles.gastoNum}>R$ 0,00</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handlePress}>
-            <Ionicons name="add-circle-outline" size={45} color="white" />
+            <TouchableOpacity onPress={addPress}>
+              <Ionicons name="add-circle-outline" size={45} color="white" />
             </TouchableOpacity>
           </View>
         </View>

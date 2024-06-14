@@ -10,16 +10,22 @@ export default function Menu({ navigation }) {
         navigation.navigate('Home');
     };
 
+    const limitPress = () => {
+        navigation.navigate('Limit');
+    };
+
     return (
         <View style={styles.body}>
             <View style={styles.topContainer}>
                 <TouchableOpacity onPress={homePress}>
-                <AntDesign name="left" size={25} color="white" />
+                    <AntDesign name="left" size={25} color="white" />
                 </TouchableOpacity>
                 <MaterialIcons name="account-circle" size={35} color="white" />
             </View>
             <View style={styles.main}>
-                <Text style={styles.menuText}>Limite de gastos</Text>
+                <TouchableOpacity onPress={limitPress}>
+                    <Text style={styles.menuText}>Limite de gastos</Text>
+                </TouchableOpacity>
                 <Text style={styles.menuText}>Metas</Text>
                 <Text style={styles.menuText}>Calendário</Text>
                 <Text style={styles.menuText}>Amigos</Text>
