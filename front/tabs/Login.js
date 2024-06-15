@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/loginStyle.js';
 
+
 export default function Login({ navigation }) {
 
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ export default function Login({ navigation }) {
 
   const handleSubmit = async function() {
     console.log('email:', email, 'senha:', password)
-    // e.preventDefault();
+
     const data = {
       email,
       password,
@@ -27,7 +28,6 @@ export default function Login({ navigation }) {
       body: JSON.stringify(data)
     })
 
-    
 
     let content = await response.json();
     
@@ -90,6 +90,7 @@ export default function Login({ navigation }) {
                 placeholder='Digite sua senha'
                 placeholderTextColor={'white'}
                 value={password}
+                secureTextEntry
                 onChange={(e) => setPassword(e.target.value)}
               />
               <Text style={styles.passwordForget}>Esqueci minha senha</Text>
@@ -124,4 +125,11 @@ export default function Login({ navigation }) {
 
     )
   
+
+    
 }
+
+
+export const useEmail = () => {
+  return email;
+};

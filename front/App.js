@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, Modal } from 'react-native';
 import { styles } from './styles/appStyle';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,6 +9,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -26,7 +28,7 @@ const Stack = createStackNavigator();
 export default function Home() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Add">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Menu" component={Menu} options={{ headerShown: false }} />
         <Stack.Screen name="Add" component={Add} options={{ headerShown: false }} />
@@ -56,32 +58,70 @@ function HomeScreen({ navigation, route }) {
   };
 
   const limitPress = () => {
-    navigation.navigate('Limit', {emailP2: route.params.emailP});
+    navigation.navigate('Limit', { emailP2: route.params.emailP });
   };
 
   const addPress = () => {
     navigation.navigate('Add');
   };
 
-
   const handlePress = () => {
     Linking.openURL('https://exemplo.com');
   };
 
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const lightGreen = '#009443';
+  const normalGreen = '#2b3b29';
+  const darkerGreen = '#182117';
+  const darkGreen = '#11170F';
   return (
 
 
     <View style={styles.body}>
 
-      <View style={styles.statusBG}></View>
+      <View style={{
+        zIndex: 1,
+        backgroundColor: lightGreen,
+        position: 'absolute',
+        width: '100%',
+        height: 32,
+        top: 0,
+      }}></View>
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
         <View style={styles.header}>
           <View style={styles.topContentIcons}>
-            <TouchableOpacity onPress={menuPress}>
-              <Entypo name="menu" size={35} color="white" />
-            </TouchableOpacity>
+
+            <Entypo name="menu" size={35} color="white" onPress={() => setIsModalVisible(true)} />
+
+
+            <Modal
+              visible={isModalVisible}
+              onRequestClose={() => setIsModalVisible(false)}
+              animationType="slide"
+              presentationStyle="pageSheet"
+            >
+
+              <View style={styles.body}>
+                <View style={styles.topContainer}>
+
+                  <AntDesign name="left" size={25} color="white" onPress={() => setIsModalVisible(false)} />
+                  <MaterialIcons name="account-circle" size={35} color="white" />
+
+                </View>
+                <View style={styles.mainModal}>
+                  <TouchableOpacity onPress={limitPress}>
+                    <Text style={styles.menuText}>Limite de gastos</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.menuText}>Metas</Text>
+                  <Text style={styles.menuText}>Calendário</Text>
+                  <Text style={styles.menuText}>Amigos</Text>
+                </View>
+              </View>
+            </Modal>
+
             <TouchableOpacity onPress={loginPress}>
               <MaterialCommunityIcons name="account-circle" size={35} color="white" />
             </TouchableOpacity>
@@ -182,7 +222,7 @@ function HomeScreen({ navigation, route }) {
 
         </View>
       </ScrollView>
-    </View>
+    </View >
 
 
   );

@@ -24,7 +24,9 @@ export default function Limit({ navigation, route }) {
   };
 
   const editPress = () => {
-    navigation.navigate('EditLimit', {emailP3: route.params.emailP2});
+    navigation.navigate('EditLimit', {
+      emailP2: route.params.emailP,
+      emailP3: route.params.emailP2 });
   };
 
   const handlePress = () => {
@@ -32,7 +34,6 @@ export default function Limit({ navigation, route }) {
     setShowLimite(showLimite)
   };
 
-  console.log(route.params.emailP)
 
   return (
 

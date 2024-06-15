@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: 32,
-    top: 0, // Define a posição do topo como 0 para fixar o elemento na parte superior da tela
+    top: 0,
   },
 
   body: {
@@ -339,6 +339,35 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
   },
+
+  topContainer: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 42,
+    paddingHorizontal: 30,
+  },
+
+  mainModal: {
+    paddingTop: 30,
+    gap: 20,
+    
+  },
+
+
+  menuText: {
+    backgroundColor: darkerGreen,
+    padding: 15,
+    paddingLeft: 30,
+    color: 'white',
+    fontSize: 20,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: normalGreen
+  },
+
 
   
 
