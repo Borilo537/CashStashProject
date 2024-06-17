@@ -9,7 +9,7 @@ async function updateLimit(request, response) {
 
     const params = Array(
         request.body.limite,
-        request.body.emailLogin,
+        request.body.emailLoggado,
     );
 
     
@@ -46,13 +46,16 @@ async function updateLimit(request, response) {
 
 
 async function selectLimit(request, response) {
-    const query = 'SELECT * FROM limite;';
+    const query = 'SELECT valor FROM limite WHERE email = ?;';
 
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
-    connection.query(query, (err, results) => {
+    const params = Array(
+        request.body.emailLoggado,
+    );
+    
+    connection.query(query, params, (err, results) => {
         try {
             if (results) {
-                console.log("res", results[0].valor)
+                console.log("LOGADO", results[0].valor)
                 response
                     .status(201)
                     .json({
@@ -60,7 +63,6 @@ async function selectLimit(request, response) {
                         message: results[0].valor,
                         data: results[0].valor
                     });
-
 
             } else {
                 response
@@ -72,7 +74,7 @@ async function selectLimit(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { // Caso aconteça algum erro na execução
+        } catch (e) { 
             response.status(400).json({
                     succes: false,
                     message: "Ocorreu um erro. Não foi possível cadastrar usuário!",

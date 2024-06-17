@@ -3,26 +3,25 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/editLimitStyle';
 import { api } from "../services/api";
+import { emailLoggado } from './Login';
 
-export default function EditLimit({ navigation, route }) {
+
+export default function EditLimit({ navigation }) {
     const [limite, setLimite] = useState('');
-    const [emailLogin, setEmailLogin] = useState(route.params.emailP3)
     const [showLimite, setShowLimite] = useState(0);
 
     useEffect(() => {
         api.get('/limit/select').then((res) => {
             setShowLimite(res.data.data);
-            // console.log(showLimite)
         })
-
     }, [])
-    
+
     const handleSubmit = async (e) => {
 
         e.preventDefault();
         const data = {
-            limite
- 
+            limite,
+            emailLoggado
         };
 
 
@@ -40,7 +39,7 @@ export default function EditLimit({ navigation, route }) {
         Linking.openURL('https://exemplo.com');
     };
 
-    console.log(emailLogin)
+
 
     return (
 

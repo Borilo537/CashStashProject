@@ -7,11 +7,13 @@ import { api } from "../services/api";
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { emailLoggado } from './Login';
 
-
-export default function Limit({ navigation, route }) {
+export default function Limit({ navigation }) {
 
   const [showLimite, setShowLimite] = useState(0);
+
+console.log(emailLoggado)
 
   useEffect(() => {
     api.get('/limit/select').then((res) => {
@@ -24,9 +26,7 @@ export default function Limit({ navigation, route }) {
   };
 
   const editPress = () => {
-    navigation.navigate('EditLimit', {
-      emailP2: route.params.emailP,
-      emailP3: route.params.emailP2 });
+    navigation.navigate('EditLimit');
   };
 
   const handlePress = () => {

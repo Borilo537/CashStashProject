@@ -12,14 +12,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
-
-
 import Login from './tabs/Login';
 import Register from './tabs/Register';
 import Menu from './tabs/Menu';
 import Add from './tabs/Add';
 import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
+
+import { emailLoggado } from './tabs/Login';
+
+
 
 
 const Stack = createStackNavigator();
@@ -43,7 +45,9 @@ export default function Home() {
 
 
 
-function HomeScreen({ navigation, route }) {
+function HomeScreen({ navigation }) {
+
+  console.log('BABABOI', emailLoggado)
 
   const registerPress = () => {
     navigation.navigate('Register');
@@ -58,7 +62,7 @@ function HomeScreen({ navigation, route }) {
   };
 
   const limitPress = () => {
-    navigation.navigate('Limit', { emailP2: route.params.emailP });
+    navigation.navigate('Limit');
   };
 
   const addPress = () => {

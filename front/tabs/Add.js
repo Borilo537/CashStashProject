@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/addStyle';
 import { api } from "../services/api";
-
+import { emailLoggado } from './Login';
 
 
 export default function Add({ navigation }) {

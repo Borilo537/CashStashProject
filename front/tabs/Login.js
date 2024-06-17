@@ -3,12 +3,14 @@ import React, { useState, useContext } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/loginStyle.js';
 
+let emailLoggado
 
 export default function Login({ navigation }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  
   const registerPress = () => {
     navigation.navigate('Register');
   };
@@ -32,8 +34,11 @@ export default function Login({ navigation }) {
     let content = await response.json();
     
     if (content.success) {
+      emailLoggado = email
+
+
       alert(content.message);
-      navigation.navigate('Home', {emailP: email});
+      navigation.navigate('Home');
 
     }else{
       console.log('ERROOO')
@@ -133,3 +138,5 @@ export default function Login({ navigation }) {
 export const useEmail = () => {
   return email;
 };
+
+export {emailLoggado}
