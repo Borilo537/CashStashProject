@@ -10,12 +10,11 @@ export default function EditLimit({ navigation }) {
     const [limite, setLimite] = useState('');
     const [showLimite, setShowLimite] = useState(0);
 
-    useEffect(() => {
-        api.get('/limit/select').then((res) => {
-            setShowLimite(res.data.data);
-        })
-    }, [])
-
+  useEffect(() => {
+    api.get('/limit/select').then((res) => {
+      setShowLimite(res.data.data);
+    })
+  }, [])
     const handleSubmit = async (e) => {
 
         e.preventDefault();

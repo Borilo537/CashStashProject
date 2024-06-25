@@ -14,10 +14,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import Login from './tabs/Login';
 import Register from './tabs/Register';
-import Menu from './tabs/Menu';
 import Add from './tabs/Add';
 import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
+import Calendar from './tabs/Calendar';
 
 import { emailLoggado } from './tabs/Login';
 
@@ -32,10 +32,10 @@ export default function Home() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Menu" component={Menu} options={{ headerShown: false }} />
         <Stack.Screen name="Add" component={Add} options={{ headerShown: false }} />
         <Stack.Screen name="Limit" component={Limit} options={{ headerShown: false }} />
         <Stack.Screen name="EditLimit" component={EditLimit} options={{ headerShown: false }} />
+        <Stack.Screen name="Calendar" component={Calendar} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
       </Stack.Navigator>
@@ -57,16 +57,16 @@ function HomeScreen({ navigation }) {
     navigation.navigate('Login');
   };
 
-  const menuPress = () => {
-    navigation.navigate('Menu');
-  };
-
   const limitPress = () => {
     navigation.navigate('Limit');
   };
 
   const addPress = () => {
     navigation.navigate('Add');
+  };
+
+  const calendarPress = () => {
+    navigation.navigate('Calendar');
   };
 
   const handlePress = () => {
@@ -116,11 +116,13 @@ function HomeScreen({ navigation }) {
 
                 </View>
                 <View style={styles.mainModal}>
-                  <TouchableOpacity onPress={limitPress}>
+                  <TouchableOpacity onPress={() => { limitPress(); setIsModalVisible(false); }}>
                     <Text style={styles.menuText}>Limite de gastos</Text>
                   </TouchableOpacity>
                   <Text style={styles.menuText}>Metas</Text>
-                  <Text style={styles.menuText}>Calendário</Text>
+                  <TouchableOpacity onPress={() => { calendarPress(); setIsModalVisible(false); }}>
+                    <Text style={styles.menuText}>Calendário</Text>
+                  </TouchableOpacity>
                   <Text style={styles.menuText}>Amigos</Text>
                 </View>
               </View>

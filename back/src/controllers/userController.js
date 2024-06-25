@@ -10,7 +10,6 @@ async function storeUser(request, response) {
         request.body.name,
         request.body.email,
         request.body.password,
-        request.body.status
     );
 
     

@@ -10,7 +10,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { emailLoggado } from './Login';
 
 export default function Limit({ navigation }) {
-
+  
   const [showLimite, setShowLimite] = useState(0);
 
 console.log(emailLoggado)

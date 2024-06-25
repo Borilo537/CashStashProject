@@ -55,16 +55,17 @@ async function selectLimit(request, response) {
     connection.query(query, params, (err, results) => {
         try {
             if (results) {
-                console.log("LOGADO", results[0].valor)
+                console.log("LOGADO", data)
                 response
                     .status(201)
                     .json({
                         success: true,
-                        message: results[0].valor,
-                        data: results[0].valor
+                        message: results,
+                        data: results
                     });
 
             } else {
+                console.log("NÃO LOGADO")
                 response
                     .status(400)
                     .json({
@@ -75,6 +76,7 @@ async function selectLimit(request, response) {
                     });
             }
         } catch (e) { 
+            console.log("ERRO CATCH")
             response.status(400).json({
                     succes: false,
                     message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
