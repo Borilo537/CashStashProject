@@ -84,14 +84,7 @@ console.log(emailLoggado)
           </View>
 
 
-
-
-
         </View>
-
-
-
-
 
 
         <StatusBar style="light" />

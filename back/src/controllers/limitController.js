@@ -55,7 +55,7 @@ async function selectLimit(request, response) {
     connection.query(query, params, (err, results) => {
         try {
             if (results) {
-                console.log("LOGADO", data)
+                console.log("LOGADO", results)
                 response
                     .status(201)
                     .json({
@@ -71,17 +71,18 @@ async function selectLimit(request, response) {
                     .json({
                         success: false,
                         message: `Não foi possível realizar o cadastro. Verifique os dados informados`,
-                        query: err.sql,
-                        sqlMessage: err.sqlMessage
+                        query: err,
+                        sqlMessage: err
                     });
             }
         } catch (e) { 
-            console.log("ERRO CATCH")
+            console.log("ERRO CATCH", e)
+
             response.status(400).json({
                     succes: false,
                     message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
+                    query: e.sql,
+                    sqlMessage: e.sqlMessage
                 });
         }
     });
