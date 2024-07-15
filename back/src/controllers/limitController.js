@@ -3,7 +3,7 @@ const connection = require('../config/db');
 
 
 async function updateLimit(request, response) {
-    // const query = 'update limite set valor = ? where email = ?';
+
     const query = 'update limite set valor = ? where email = ?';
 
 
@@ -47,15 +47,15 @@ async function updateLimit(request, response) {
 
 async function selectLimit(request, response) {
     const query = 'SELECT valor FROM limite WHERE email = ?;';
-
-    const params = Array(
-        request.body.emailLoggado,
-    );
     
+    const params = Array(
+        request.query['email']
+    );
+
     connection.query(query, params, (err, results) => {
         try {
             if (results) {
-                console.log("LOGADO", results)
+                console.log("LOGADO", results.data)
                 response
                     .status(201)
                     .json({

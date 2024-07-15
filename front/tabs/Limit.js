@@ -10,16 +10,15 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { emailLoggado } from './Login';
 
 export default function Limit({ navigation }) {
-  
+
   const [showLimite, setShowLimite] = useState(0);
 
-console.log(emailLoggado)
 
   useEffect(() => {
-    api.get('/limit/select').then((res) => {
-      setShowLimite(res.data.data);
+    api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
+      setShowLimite(res.data.data[0].valor);
     })
-  }, [])
+  })
 
   const homePress = () => {
     navigation.navigate('Home');

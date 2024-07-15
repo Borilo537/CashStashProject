@@ -10,11 +10,13 @@ export default function EditLimit({ navigation }) {
     const [limite, setLimite] = useState('');
     const [showLimite, setShowLimite] = useState(0);
 
-  useEffect(() => {
-    api.get('/limit/select').then((res) => {
-      setShowLimite(res.data.data);
-    })
-  }, [])
+    useEffect(() => {
+        api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
+            console.log(res.data.data[0])
+            setShowLimite(res.data.data[0].valor);
+        })
+    }, [emailLoggado])
+
     const handleSubmit = async (e) => {
 
         e.preventDefault();
@@ -22,6 +24,7 @@ export default function EditLimit({ navigation }) {
             limite,
             emailLoggado
         };
+
 
 
         await api.post("/limit/update", data);

@@ -10,14 +10,14 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  
+
   const registerPress = () => {
     navigation.navigate('Register');
   };
 
 
 
-  const handleSubmit = async function() {
+  const handleSubmit = async function () {
     console.log('email:', email, 'senha:', password)
 
     const data = {
@@ -32,106 +32,116 @@ export default function Login({ navigation }) {
 
 
     let content = await response.json();
-    
-    if (content.success) {
-      emailLoggado = email
 
+    if (content.success) {
+
+      console.log("emailLogado", email)
+      emailLoggado = email
+      localStorage.setItem('@conta_loggada', JSON.stringify(emailLoggado))
 
       alert(content.message);
       navigation.navigate('Home');
 
-    }else{
+    } else {
       console.log('ERROOO')
       alert(content.message);
     }
-    
+
   };
-  
-    return (
 
-      <View style={styles.body}>
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        console.log('enter ')
+        handleSubmit();
+      }
+    };
 
-        <View style={{
-          zIndex: 1,
-          backgroundColor: '#11170F',
-          position: 'absolute',
-          width: '100%',
-          height: 32,
-          top: 0,
-        }}></View>
+    window.addEventListener('keydown', handleKeyDown);
 
-        <ScrollView contentContainerStyle={{
-          flexGrow: 1,
-        }}>
+  return (
 
-          <View style={styles.header}>
-            <View style={styles.logoContainer}>
-              <ImageBackground source={require('../assets/logo3.png')} style={styles.logo}></ImageBackground>
-            </View>
-            <Text style={styles.loginTitle}>Entre no CashStash</Text>
-            <Text style={styles.loginText}>Tenha controle sobre seu dinheiro</Text>
+    <View style={styles.body}>
+
+      <View style={{
+        zIndex: 1,
+        backgroundColor: '#11170F',
+        position: 'absolute',
+        width: '100%',
+        height: 32,
+        top: 0,
+      }}></View>
+
+      <ScrollView contentContainerStyle={{
+        flexGrow: 1,
+      }}>
+
+        <View style={styles.header}>
+          <View style={styles.logoContainer}>
+            <ImageBackground source={require('../assets/logo3.png')} style={styles.logo}></ImageBackground>
+          </View>
+          <Text style={styles.loginTitle}>Entre no CashStash</Text>
+          <Text style={styles.loginText}>Tenha controle sobre seu dinheiro</Text>
+        </View>
+
+        <View style={styles.form}>
+
+          <View style={styles.input}>
+            <Text style={styles.inputLabel}>Email</Text>
+
+            <TextInput
+              style={styles.inputControl}
+              placeholder='Digite seu e-mail'
+              placeholderTextColor={'white'}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
           </View>
 
-          <View style={styles.form}>
+          <View style={styles.input}>
+            <Text style={styles.inputLabel}>Senha</Text>
 
-            <View style={styles.input}>
-              <Text style={styles.inputLabel}>Email</Text>
+            <TextInput
+              style={styles.inputControl}
+              placeholder='Digite sua senha'
+              placeholderTextColor={'white'}
+              value={password}
+              secureTextEntry
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Text style={styles.passwordForget}>Esqueci minha senha</Text>
 
-              <TextInput
-                style={styles.inputControl}
-                placeholder='Digite seu e-mail'
-                placeholderTextColor={'white'}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+          </View>
 
-            </View>
-
-            <View style={styles.input}>
-              <Text style={styles.inputLabel}>Senha</Text>
-
-              <TextInput
-                style={styles.inputControl}
-                placeholder='Digite sua senha'
-                placeholderTextColor={'white'}
-                value={password}
-                secureTextEntry
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <Text style={styles.passwordForget}>Esqueci minha senha</Text>
-
-            </View>
-
-            <View style={styles.formAction}>
-              <TouchableOpacity onPress={handleSubmit}>
-                
-                <View style={styles.btn}>
-                  <Text style={styles.btnText}>Entrar</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-
-            <TouchableOpacity onPress={registerPress}>
-              <Text style={styles.changeLogin}>Criar uma conta</Text>
+          <View style={styles.formAction}>
+            <TouchableOpacity onPress={handleSubmit}>
+              <View style={styles.btn}>
+                <Text style={styles.btnText}>Entrar</Text>
+              </View>
             </TouchableOpacity>
-
           </View>
 
 
+          <TouchableOpacity onPress={registerPress}>
+            <Text style={styles.changeLogin}>Criar uma conta</Text>
+          </TouchableOpacity>
+
+        </View>
 
 
 
-          <StatusBar style="light" />
 
 
-        </ScrollView>
-      </View>
+        <StatusBar style="light" />
 
-    )
-  
 
-    
+      </ScrollView>
+    </View>
+
+  )
+
+
+
 }
 
 
@@ -139,4 +149,4 @@ export const useEmail = () => {
   return email;
 };
 
-export {emailLoggado}
+export { emailLoggado }
