@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect, AsyncStorage } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, Modal } from 'react-native';
 import { styles } from './styles/appStyle';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -22,15 +24,30 @@ import Calendar from './tabs/Calendar';
 import { emailLoggado } from './tabs/Login';
 
 
-
-
 const Stack = createStackNavigator();
 
 
 export default function Home() {
+  const [initialRoute, setInitialRoute] = useState('Login');
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const emailLoggado = await AsyncStorage.getItem('conta_loggada');
+      if (emailLoggado) {
+        console.log('LOCALSTORAGE:', emailLoggado);
+        setInitialRoute('Home');
+      } else {
+        console.log('Nenhum email loggado encontrado.');
+        setInitialRoute('Login');
+      }
+    };
+
+    checkLogin();
+  }, []);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName={initialRoute}>
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Add" component={Add} options={{ headerShown: false }} />
         <Stack.Screen name="Limit" component={Limit} options={{ headerShown: false }} />

@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, AsyncStorage } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/loginStyle.js';
+
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let emailLoggado
 
@@ -37,7 +39,11 @@ export default function Login({ navigation }) {
 
       console.log("emailLogado", email)
       emailLoggado = email
-      localStorage.setItem('@conta_loggada', JSON.stringify(emailLoggado))
+
+
+      await AsyncStorage.setItem('conta_loggada', JSON.stringify(emailLoggado));
+
+
 
       alert(content.message);
       navigation.navigate('Home');
@@ -49,14 +55,11 @@ export default function Login({ navigation }) {
 
   };
 
-    const handleKeyDown = (event) => {
-      if (event.key === 'Enter') {
-        console.log('enter ')
-        handleSubmit();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
+  // const handleKeyDown = (event) => {
+  //   if (event.nativeEvent.key === 'Enter') {
+  //     handleSubmit();
+  //   }
+  // };
 
   return (
 
