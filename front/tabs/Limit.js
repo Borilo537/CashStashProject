@@ -22,7 +22,17 @@ export default function Limit({ navigation }) {
     api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
       setShowLimite(res.data.data[0].valor);
     })
-  })
+  }, [emailLoggado, isFocused])
+
+  
+  const [gasto, setGasto] = useState('wqgwq');
+
+  useEffect(() => {
+    api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+        console.log('VAPO',res.data.data[0].gastado)
+        setGasto(res.data.data[0].gastado);
+    })
+}, [emailLoggado, isFocused])
 
   const homePress = () => {
     navigation.navigate('Home');
@@ -76,7 +86,7 @@ export default function Limit({ navigation }) {
           <View style={styles.main}>
             <View style={styles.gastouContainer}>
               <Text style={styles.gastouLabel}>Gasto atual</Text>
-              <Text style={styles.gastou}>R$ 67,05</Text>
+              <Text style={styles.gastou}>R$ {gasto}</Text>
             </View>
             <TouchableOpacity onPress={handlePress}>
               <View style={styles.analiseContainer}>

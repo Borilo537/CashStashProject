@@ -1,22 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
+import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput, Modal } from 'react-native';
 import { styles } from '../styles/addStyle';
 import { api } from "../services/api";
 import { emailLoggado } from './Login';
+import { useIsFocused } from '@react-navigation/native';
 
 
 export default function Add({ navigation }) {
-    const [gastado, setGastado] = useState(0);
-    const [showGasto, setShowGasto] = useState(0);
+    const [gastado, setGastado] = useState('');
+    const [showGasto, setShowGasto] = useState('');
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [gasto, setGasto] = useState('');
 
+    const isFocused = useIsFocused();
 
+    useEffect(() => {
+        api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+            console.log('VAPO', res.data.data[0].gastado)
+            setGasto(res.data.data[0].gastado);
+        })
+    }, [emailLoggado, isFocused])
+
+    const [showLimite, setShowLimite] = useState(0);
+
+    useEffect(() => {
+        api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
+            setShowLimite(res.data.data[0].valor);
+        })
+    }, [emailLoggado, isFocused])
 
 
     const handleSubmit = async (e) => {
 
         alert('Gasto Adicionado!')
-
 
         e.preventDefault();
         const data = {
@@ -24,9 +41,18 @@ export default function Add({ navigation }) {
             emailLoggado
         };
 
-
-
         await api.post("/gastos/update", data);
+
+        api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+            console.log('VAPO', res.data.data[0].gastado)
+            setGasto(res.data.data[0].gastado);
+        })
+
+        setGastado('')
+
+
+
+        setIsModalVisible(true)
 
 
     };
@@ -48,12 +74,33 @@ export default function Add({ navigation }) {
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
 
+
+
                 <TouchableOpacity onPress={homePress}>
                     <ImageBackground source={require('../assets/arrow.png')} style={styles.voltar}></ImageBackground>
                 </TouchableOpacity>
 
 
                 <View style={styles.header}>
+                    <Modal
+                        visible={isModalVisible}
+                        onRequestClose={() => setIsModalVisible(false)}
+                        transparent={true}
+                        animationType="fade"
+                    >
+
+                        <View style={styles.ModalBody}>
+                            <View style={styles.ModalAlert}>
+
+                            </View>
+                        </View>
+                        <View style={styles.ModalBG}>
+
+                        </View>
+
+
+                    </Modal>
+
                     <View style={styles.input}>
                         <Text style={styles.inputLabel}>Adicionar gasto</Text>
 
@@ -61,12 +108,12 @@ export default function Add({ navigation }) {
                             style={styles.inputControl}
                             placeholder='Ex: 15,00'
                             placeholderTextColor={'white'}
-                            value={''}
+                            value={gastado}
                             onChangeText={setGastado}
-                            cli
+
                         />
 
-                        <Text style={styles.inputExtra}>R$ 0,00 gastos de R$ 200</Text>
+                        <Text style={styles.inputExtra}>R$ {gasto} gastos de R$ {showLimite}</Text>
 
                     </View>
 

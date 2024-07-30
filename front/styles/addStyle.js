@@ -91,10 +91,10 @@ export const styles = StyleSheet.create({
   limit: {
     color: 'white',
     fontSize: 50,
-    
+
   },
 
-  
+
   btn: {
     marginTop: 40,
     backgroundColor: lightGreen,
@@ -112,7 +112,30 @@ export const styles = StyleSheet.create({
     color: 'white',
   },
 
+  ModalBG: {
+    backgroundColor: 'black',
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0.5,
+  },
 
+  ModalBody: {
+    zIndex: 1,
+    flex: 1,
+    display: 'flex',
+    height: '100%',
+    alignItems: 'flex-end',
+  },
+
+  ModalAlert: {
+    backgroundColor: 'red',
+    height: 50,
+    width: '100%',
+  }
 
 
 

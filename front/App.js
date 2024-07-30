@@ -32,7 +32,7 @@ const Stack = createStackNavigator();
 export default function Home() {
   const [initialRoute, setInitialRoute] = useState('Login');
 
- 
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={initialRoute}>
@@ -89,10 +89,10 @@ function HomeScreen({ navigation }) {
 
   useEffect(() => {
     api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
-        console.log('VAPO',res.data.data[0].gastado)
-        setGasto(res.data.data[0].gastado);
+      console.log('VAPO', res.data.data[0].gastado)
+      setGasto(res.data.data[0].gastado);
     })
-}, [emailLoggado, isFocused])
+  }, [emailLoggado, isFocused])
 
 
   return (
@@ -153,7 +153,7 @@ function HomeScreen({ navigation }) {
           <View style={styles.gastoContainer}>
             <TouchableOpacity onPress={limitPress}>
               <Text style={styles.gastoNum}
-               >R$ {gasto}</Text>
+              >R$ {gasto}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={addPress}>
               <Ionicons name="add-circle-outline" size={45} color="white" />
