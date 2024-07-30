@@ -32,6 +32,7 @@ export default function Register({ navigation }) {
     }
     await api.post("/user/create", data);
     await api.post("/user/createLimit", limitData);
+    await api.post("/user/createGasto", limitData);
     alert("Usuário criado com sucesso!");
   };
 

@@ -1,10 +1,11 @@
 const connection = require('../config/db');
 
 async function updateGastos(request, response) {
-    const query = 'UPDATE gastos SET gastado = ?;';
+    const query = 'UPDATE gastos SET gastado = gastado + ? WHERE email = ?';
 
     const params = Array(
-        request.body.gasto,
+        request.body.gastado,
+        request.body.emailLoggado,
     );
 
     connection.query(query, params, (err, results) => {
@@ -43,10 +44,13 @@ async function updateGastos(request, response) {
 
 
 async function selectGastos(request, response) {
-    const query = 'SELECT * FROM gastos;';
-
+    const query = 'SELECT gastado FROM gastos WHERE email = ?;';
     
-    connection.query(query, (err, results) => {
+    const params = Array(
+        request.query['email']
+    );
+    
+    connection.query(query, params, (err, results) => {
         try {
             if (results) {
                 console.log("res", results[0].gastado)
@@ -54,8 +58,8 @@ async function selectGastos(request, response) {
                     .status(201)
                     .json({
                         success: true,
-                        message: results[0].gastado,
-                        data: results[0].gastado
+                        message: results,
+                        data: results
                     });
 
 

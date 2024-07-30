@@ -12,7 +12,7 @@ export default function EditLimit({ navigation }) {
 
     useEffect(() => {
         api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
-            console.log(res.data.data[0])
+            console.log('datadata',res.data.data[0])
             setShowLimite(res.data.data[0].valor);
         })
     }, [emailLoggado])

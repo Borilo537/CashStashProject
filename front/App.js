@@ -5,6 +5,7 @@ import { styles } from './styles/appStyle';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useIsFocused } from '@react-navigation/native';
 
 
 
@@ -21,6 +22,7 @@ import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
 import Calendar from './tabs/Calendar';
 
+import { api } from "./services/api";
 import { emailLoggado } from './tabs/Login';
 
 
@@ -30,21 +32,7 @@ const Stack = createStackNavigator();
 export default function Home() {
   const [initialRoute, setInitialRoute] = useState('Login');
 
-  useEffect(() => {
-    const checkLogin = async () => {
-      const emailLoggado = await AsyncStorage.getItem('conta_loggada');
-      if (emailLoggado) {
-        console.log('LOCALSTORAGE:', emailLoggado);
-        setInitialRoute('Home');
-      } else {
-        console.log('Nenhum email loggado encontrado.');
-        setInitialRoute('Login');
-      }
-    };
-
-    checkLogin();
-  }, []);
-
+ 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={initialRoute}>
@@ -63,8 +51,8 @@ export default function Home() {
 
 
 function HomeScreen({ navigation }) {
-
   console.log('BABABOI', emailLoggado)
+  const isFocused = useIsFocused();
 
   const registerPress = () => {
     navigation.navigate('Register');
@@ -96,8 +84,18 @@ function HomeScreen({ navigation }) {
   const normalGreen = '#2b3b29';
   const darkerGreen = '#182117';
   const darkGreen = '#11170F';
-  return (
 
+  const [gasto, setGasto] = useState('wqgwq');
+
+  useEffect(() => {
+    api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+        console.log('VAPO',res.data.data[0].gastado)
+        setGasto(res.data.data[0].gastado);
+    })
+}, [emailLoggado, isFocused])
+
+
+  return (
 
     <View style={styles.body}>
 
@@ -154,7 +152,8 @@ function HomeScreen({ navigation }) {
 
           <View style={styles.gastoContainer}>
             <TouchableOpacity onPress={limitPress}>
-              <Text style={styles.gastoNum}>R$ 0,00</Text>
+              <Text style={styles.gastoNum}
+               >R$ {gasto}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={addPress}>
               <Ionicons name="add-circle-outline" size={45} color="white" />

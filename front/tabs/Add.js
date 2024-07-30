@@ -7,34 +7,28 @@ import { emailLoggado } from './Login';
 
 
 export default function Add({ navigation }) {
-    const [gasto, setGasto] = useState(0);
+    const [gastado, setGastado] = useState(0);
     const [showGasto, setShowGasto] = useState(0);
-    let dados = 0
-
-    api.get('/gastos/select').then((res) => {
-        console.log('resposta',res.data.data)
-        dados = res.data.data + gasto
 
 
 
-    })
 
-
-
-    const handleSubmit = async () => {
-
-
-        
+    const handleSubmit = async (e) => {
 
         alert('Gasto Adicionado!')
 
 
-        // let newGasto = showGasto+gasto
+        e.preventDefault();
         const data = {
-            gasto
+            gastado,
+            emailLoggado
         };
 
+
+
         await api.post("/gastos/update", data);
+
+
     };
 
     const homePress = () => {
@@ -67,8 +61,9 @@ export default function Add({ navigation }) {
                             style={styles.inputControl}
                             placeholder='Ex: 15,00'
                             placeholderTextColor={'white'}
-                            value={gasto}
-                            onChangeText={setGasto}
+                            value={''}
+                            onChangeText={setGastado}
+                            cli
                         />
 
                         <Text style={styles.inputExtra}>R$ 0,00 gastos de R$ 200</Text>

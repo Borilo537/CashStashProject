@@ -41,10 +41,6 @@ export default function Login({ navigation }) {
       emailLoggado = email
 
 
-      await AsyncStorage.setItem('conta_loggada', JSON.stringify(emailLoggado));
-
-
-
       alert(content.message);
       navigation.navigate('Home');
 

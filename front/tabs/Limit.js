@@ -4,6 +4,9 @@ import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView } from
 import { styles } from '../styles/limitStyle';
 import { api } from "../services/api";
 
+import { useIsFocused } from '@react-navigation/native';
+
+
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -13,6 +16,7 @@ export default function Limit({ navigation }) {
 
   const [showLimite, setShowLimite] = useState(0);
 
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
