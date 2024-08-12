@@ -20,7 +20,7 @@ import Register from './tabs/Register';
 import Add from './tabs/Add';
 import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
-import Calendar from './tabs/Calendar';
+import Calendario from './tabs/Calendario';
 
 import { api } from "./services/api";
 import { emailLoggado } from './tabs/Login';
@@ -30,7 +30,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Login');
+  const [initialRoute, setInitialRoute] = useState('Calendario');
 
 
   return (
@@ -40,7 +40,7 @@ export default function Home() {
         <Stack.Screen name="Add" component={Add} options={{ headerShown: false }} />
         <Stack.Screen name="Limit" component={Limit} options={{ headerShown: false }} />
         <Stack.Screen name="EditLimit" component={EditLimit} options={{ headerShown: false }} />
-        <Stack.Screen name="Calendar" component={Calendar} options={{ headerShown: false }} />
+        <Stack.Screen name="Calendario" component={Calendario} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
       </Stack.Navigator>
@@ -70,8 +70,8 @@ function HomeScreen({ navigation }) {
     navigation.navigate('Add');
   };
 
-  const calendarPress = () => {
-    navigation.navigate('Calendar');
+  const calendarioPress = () => {
+    navigation.navigate('Calendario');
   };
 
   const handlePress = () => {
@@ -135,7 +135,7 @@ function HomeScreen({ navigation }) {
                     <Text style={styles.menuText}>Limite de gastos</Text>
                   </TouchableOpacity>
                   <Text style={styles.menuText}>Metas</Text>
-                  <TouchableOpacity onPress={() => { calendarPress(); setIsModalVisible(false); }}>
+                  <TouchableOpacity onPress={() => { calendarioPress(); setIsModalVisible(false); }}>
                     <Text style={styles.menuText}>Calendário</Text>
                   </TouchableOpacity>
                   <Text style={styles.menuText}>Amigos</Text>
