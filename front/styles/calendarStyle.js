@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
 
   statusBG: {
     zIndex: 1,
-    backgroundColor: lightGreen,
+    backgroundColor: darkGreen,
     position: 'absolute',
     width: '100%',
     height: 32,
@@ -37,8 +37,13 @@ export const styles = StyleSheet.create({
 
   },
 
+  main: {
+    padding: 10,
+  },
+
   calendario: {
     fontWeight: '700',
+    marginTop: 30,
   }
 
   
