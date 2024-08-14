@@ -7,7 +7,7 @@ const lightYellow = '#945e00';
 const normalGreen = '#2b3b29';
 const darkerGreen = '#182117';
 const darkGreen = '#11170F';
-const red = '#ff4747';
+const red = '#ff3838';
 
 export const styles = StyleSheet.create({
 
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   header: {
     width: '100%',
     height: 280,
-    paddingTop: 50,
+    paddingTop: 60,
     paddingHorizontal: 30,
   },
 
@@ -135,11 +135,21 @@ export const styles = StyleSheet.create({
 
   ModalAlert: {
     backgroundColor: red,
-    height: 400,
+    height: 200,
     width: '100%',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     padding: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    gap: 10,
+  },
+
+  alertText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 20,
   },
 
   buttonContainer: {
@@ -155,7 +165,7 @@ export const styles = StyleSheet.create({
     borderColor: 'white',
     backgroundColor: 'white',
     color: red,
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     width: '45%',
     textAlign: 'center',
@@ -167,7 +177,7 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'white',
     color: 'white',
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     width: '45%',
     textAlign: 'center',

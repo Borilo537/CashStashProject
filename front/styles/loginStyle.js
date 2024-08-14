@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
   body: {
     backgroundColor: 'red',
     flex: 1,
+    overflow: 'scroll',
     backgroundColor: darkGreen,
   },
 

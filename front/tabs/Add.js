@@ -10,7 +10,7 @@ import { useIsFocused } from '@react-navigation/native';
 export default function Add({ navigation }) {
     const [gastado, setGastado] = useState('');
     const [showGasto, setShowGasto] = useState('');
-    const [isModalVisible, setIsModalVisible] = useState(true)
+    const [isModalVisible, setIsModalVisible] = useState(false)
     const [gasto, setGasto] = useState('');
 
     const isFocused = useIsFocused();
@@ -32,27 +32,35 @@ export default function Add({ navigation }) {
 
 
     const handleSubmit = async (e) => {
+        let valorComparar = parseFloat(gasto) + parseFloat(gastado)
 
-        alert('Gasto Adicionado!')
+        if (valorComparar > showLimite){
+            setIsModalVisible(true)
+        }
+        else if(valorComparar < showLimite){
+            setIsModalVisible(false)
+            alert('Gasto Adicionado!')
 
-        e.preventDefault();
-        const data = {
-            gastado,
-            emailLoggado
-        };
+            e.preventDefault();
+            const data = {
+                gastado,
+                emailLoggado
+            };
+    
+            await api.post("/gastos/update", data);
+    
+            api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+                console.log('VAPO', res.data.data[0].gastado)
+                setGasto(res.data.data[0].gastado);
+            })
+    
+            setGastado('')
+    
+      
+        }
 
-        await api.post("/gastos/update", data);
-
-        api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
-            console.log('VAPO', res.data.data[0].gastado)
-            setGasto(res.data.data[0].gastado);
-        })
-
-        setGastado('')
 
 
-
-        setIsModalVisible(true)
 
 
     };
@@ -91,9 +99,32 @@ export default function Add({ navigation }) {
 
                         <View style={styles.ModalBody}>
                             <View style={styles.ModalAlert}>
+                                <Text style={styles.alertText}>Este gasto excede seu limite, deseja continuar?</Text>
                                 <View style={styles.buttonContainer}>
-                                    <View style={styles.button}>Continuar</View>
-                                    <View style={styles.button2}>Cancelar</View>
+                                    <Text style={styles.button}
+                                    onPress={async(e) => {
+                                        setIsModalVisible(false)
+                                        alert('Gasto Adicionado!')
+                            
+                                        e.preventDefault();
+                                        const data = {
+                                            gastado,
+                                            emailLoggado
+                                        };
+                                
+                                        await api.post("/gastos/update", data);
+                                
+                                        api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+                                            console.log('VAPO', res.data.data[0].gastado)
+                                            setGasto(res.data.data[0].gastado);
+                                        })
+                                
+                                        setGastado('')
+                                
+                                    }}>Continuar</Text>
+                                    <Text style={styles.button2}
+                                    onPress={() => setIsModalVisible(false)}
+                                    >Cancelar</Text>
                                 </View>
                             </View>
                         </View>
