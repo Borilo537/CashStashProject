@@ -10,7 +10,7 @@ import { useIsFocused } from '@react-navigation/native';
 export default function Add({ navigation }) {
     const [gastado, setGastado] = useState('');
     const [showGasto, setShowGasto] = useState('');
-    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [isModalVisible, setIsModalVisible] = useState(true)
     const [gasto, setGasto] = useState('');
 
     const isFocused = useIsFocused();
@@ -91,7 +91,10 @@ export default function Add({ navigation }) {
 
                         <View style={styles.ModalBody}>
                             <View style={styles.ModalAlert}>
-
+                                <View style={styles.buttonContainer}>
+                                    <View style={styles.button}>Continuar</View>
+                                    <View style={styles.button2}>Cancelar</View>
+                                </View>
                             </View>
                         </View>
                         <View style={styles.ModalBG}>

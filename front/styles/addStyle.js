@@ -7,6 +7,7 @@ const lightYellow = '#945e00';
 const normalGreen = '#2b3b29';
 const darkerGreen = '#182117';
 const darkGreen = '#11170F';
+const red = '#ff4747';
 
 export const styles = StyleSheet.create({
 
@@ -125,16 +126,53 @@ export const styles = StyleSheet.create({
 
   ModalBody: {
     zIndex: 1,
-    flex: 1,
     display: 'flex',
-    height: '100%',
+    height: 'auto',
     alignItems: 'flex-end',
+    marginTop: 'auto',
+    
   },
 
   ModalAlert: {
-    backgroundColor: 'red',
-    height: 50,
+    backgroundColor: red,
+    height: 400,
     width: '100%',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    padding: 20,
+  },
+
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    gap: 10,
+  },
+
+  button: {
+    borderWidth: 2,
+    borderColor: 'white',
+    backgroundColor: 'white',
+    color: red,
+    padding: 15,
+    borderRadius: 10,
+    width: '45%',
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Verdana',
+  },
+
+  button2: {
+    borderWidth: 2,
+    borderColor: 'white',
+    color: 'white',
+    padding: 15,
+    borderRadius: 10,
+    width: '45%',
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Verdana',
   }
 
 
