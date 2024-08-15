@@ -85,7 +85,7 @@ function HomeScreen({ navigation }) {
   const darkerGreen = '#182117';
   const darkGreen = '#11170F';
 
-  const [gasto, setGasto] = useState('wqgwq');
+  const [gasto, setGasto] = useState('0');
 
   useEffect(() => {
     api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {

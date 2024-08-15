@@ -40,7 +40,12 @@ export default function Calendario({ navigation }) {
                             selectedDayBackgroundColor: lightGreen,
                             selectedDayTextColor: 'white',
                         }}
-                        onDayPress={console.log}
+                        onDayPress={setDay}
+                        
+                        markedDates={day &&  {
+                            [day.dateString]: { selected: true },
+                        }}
+
                         minDate={new Date().toDateString()}>
 
                     </Calendar>
