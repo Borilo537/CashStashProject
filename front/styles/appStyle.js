@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const lightGreen = '#009443';
 const normalGreen = '#2b3b29';
 const darkerGreen = '#182117';
-const darkGreen = '#11170F';
+const darkGreen = '#0d120c';
 
 export const styles = StyleSheet.create({
 

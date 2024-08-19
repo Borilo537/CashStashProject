@@ -5,7 +5,7 @@ const lightGreen = '#009443';
 const lightYellow = '#945e00';
 const normalGreen = '#2b3b29';
 const darkerGreen = '#182117';
-const darkGreen = '#11170F';
+const darkGreen = '#0d120c';
 
 export const styles = StyleSheet.create({
 
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: 32,
-    top: 0, // Define a posição do topo como 0 para fixar o elemento na parte superior da tela
+    top: 0,
   },
 
   body: {
@@ -29,22 +29,69 @@ export const styles = StyleSheet.create({
     paddingBottom: 220,
   },
 
+  voltar: {
+    width: 20,
+    height: 20,
+    marginTop: 40,
+    marginLeft: 30,
+    transform: 'rotate(180deg)',
+  },
+
   header: {
     width: '100%',
-    height: 280,
-    backgroundColor: lightGreen,
     paddingTop: 50,
-
+    padding: 30,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    gap: 25,
   },
+
+  headText: {
+    color: 'white',
+    fontSize: 30
+  },
+
+  eventoBox: {
+    width: '100%',
+    height: 120,
+    backgroundColor: normalGreen,
+    borderRadius: 10,
+  },
+
+  inputControl: {
+    backgroundColor: normalGreen,
+    color: 'white',
+    padding: 9,
+    paddingLeft: 15,
+    borderRadius: 10,
+    fontSize: 15,
+  },
+
 
   main: {
     padding: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    height: 240,
+    bottom: 0
   },
 
-  calendario: {
-    fontWeight: '700',
-    marginTop: 30,
-  }
+  btnText: {
+    backgroundColor: lightGreen,
+    padding: 25,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '500',
+  },
+
 
   
 });

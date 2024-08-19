@@ -3,6 +3,7 @@ import React, { useState, useEffect, AsyncStorage } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, Modal } from 'react-native';
 import { styles } from './styles/appStyle';
 
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
@@ -20,7 +21,7 @@ import Register from './tabs/Register';
 import Add from './tabs/Add';
 import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
-import Calendario from './tabs/Calendario';
+import Calendario from './tabs/Calendario.js';
 
 import { api } from "./services/api";
 import { emailLoggado } from './tabs/Login';
@@ -30,7 +31,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Login');
+  const [initialRoute, setInitialRoute] = useState('Calendario');
 
 
   return (
@@ -83,7 +84,7 @@ function HomeScreen({ navigation }) {
   const lightGreen = '#009443';
   const normalGreen = '#2b3b29';
   const darkerGreen = '#182117';
-  const darkGreen = '#11170F';
+  const darkGreen = '#0d120c';
 
   const [gasto, setGasto] = useState('wqgwq');
 
@@ -216,7 +217,7 @@ function HomeScreen({ navigation }) {
 
         <View style={styles.main}>
 
-          <TouchableOpacity onPress={handlePress}>
+          <TouchableOpacity onPress={calendarioPress}>
             <View style={styles.calendarioContainer}>
               <Text style={styles.calendarioText}>Calendário</Text>
               <Entypo name="chevron-right" size={30} color="white" />
