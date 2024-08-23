@@ -31,7 +31,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Calendario');
+  const [initialRoute, setInitialRoute] = useState('Login');
 
 
   return (

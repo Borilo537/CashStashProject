@@ -5,7 +5,7 @@ import { styles } from '../styles/loginStyle.js';
 
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
-let emailLoggado
+let emailLoggado = 'a@a.com'
 
 export default function Login({ navigation }) {
 
@@ -26,7 +26,7 @@ export default function Login({ navigation }) {
       email,
       password,
     };
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch('http://192.168.15.114:3000/api/auth/login', {
       method: 'POST',
       headers: { "Content-type": "application/json;charset=UTF-8" },
       body: JSON.stringify(data)
