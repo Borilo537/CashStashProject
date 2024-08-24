@@ -60,13 +60,14 @@ export const styles = StyleSheet.create({
   },
 
   inputControl: {
+    width: '50%',
     backgroundColor: normalGreen,
     color: 'white',
     padding: 9,
     paddingLeft: 15,
     borderRadius: 10,
     fontSize: 15,
-
+    
   },
 
   limitContainer: {

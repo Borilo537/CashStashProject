@@ -12,6 +12,10 @@ export default function Calendario({ navigation }) {
         navigation.navigate('Home');
     };
 
+    const DatePress = () => {
+        navigation.navigate('DateAdd');
+    };
+
 
     const lightGreen = '#009443';
     const darkGreen = '#0d120c';
@@ -42,7 +46,7 @@ export default function Calendario({ navigation }) {
                 colors={['transparent', darkGreen]}
                 style={styles.main}>
                     
-                <TouchableOpacity onPress={homePress}>
+                <TouchableOpacity onPress={DatePress}>
                     <Text style={styles.btnText}>Adicionar data</Text>
                 </TouchableOpacity>
             </LinearGradient>

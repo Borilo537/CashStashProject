@@ -21,7 +21,8 @@ import Register from './tabs/Register';
 import Add from './tabs/Add';
 import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
-import Calendario from './tabs/Calendario.js';
+import Calendario from './tabs/Calendario';
+import DateAdd from './tabs/DateAdd'
 
 import { api } from "./services/api";
 import { emailLoggado } from './tabs/Login';
@@ -31,7 +32,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Login');
+  const [initialRoute, setInitialRoute] = useState('Home');
 
 
   return (
@@ -42,6 +43,7 @@ export default function Home() {
         <Stack.Screen name="Limit" component={Limit} options={{ headerShown: false }} />
         <Stack.Screen name="EditLimit" component={EditLimit} options={{ headerShown: false }} />
         <Stack.Screen name="Calendario" component={Calendario} options={{ headerShown: false }} />
+        <Stack.Screen name="DateAdd" component={DateAdd} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
       </Stack.Navigator>

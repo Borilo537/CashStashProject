@@ -170,7 +170,6 @@ export const styles = StyleSheet.create({
     width: '45%',
     textAlign: 'center',
     fontSize: 20,
-    fontFamily: 'Verdana',
   },
 
   button2: {
@@ -182,7 +181,6 @@ export const styles = StyleSheet.create({
     width: '45%',
     textAlign: 'center',
     fontSize: 20,
-    fontFamily: 'Verdana',
   }
 
 
