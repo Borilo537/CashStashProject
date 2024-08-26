@@ -32,7 +32,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Home');
+  const [initialRoute, setInitialRoute] = useState('DateAdd');
 
 
   return (

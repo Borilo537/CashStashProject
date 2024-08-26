@@ -16,6 +16,25 @@ export default function DateAdd({ navigation }) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [dias, setDays] = useState([]);
 
+  const [number, setNumber] = useState('');
+
+  const handleNumberChange = (text) => {
+
+    let soNumeros = text.replace(/[^0-9.]/g, '');
+
+    const parts = soNumeros.split('.');
+
+    if (parts.length > 2) {
+      soNumeros = parts[0] + '.' + parts.slice(1).join('');
+    }
+
+    if (parts[1] && parts[1].length > 2) {
+      soNumeros = parts[0] + '.' + parts[1].substring(0, 2);
+    }
+
+    setNumber(soNumeros);
+  };
+
   const homePress = () => {
     navigation.navigate('Home');
   };
@@ -125,19 +144,22 @@ export default function DateAdd({ navigation }) {
               />
             </View>
             <TextInput
-
+              keyboardType="numeric"  // Exibe o teclado numérico
               style={styles.inputDataPreco}
               placeholder='Ex: 15,00'
               placeholderTextColor={'rgba(255, 255, 255, 0.8)'}
+              value={number}
+              onChangeText={handleNumberChange}
             />
+
           </View>
         </View>
 
         <TouchableOpacity onPress={homePress} style={styles.touch}>
         </TouchableOpacity>
-          <View style={styles.main}>
-            <Text style={styles.mainText}>Adicionar</Text>
-          </View>
+        <View style={styles.main}>
+          <Text style={styles.mainText}>Adicionar</Text>
+        </View>
 
         <StatusBar style="light" />
       </ScrollView>

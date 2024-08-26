@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     width: '100%',
-    paddingVertical: 15,
+    paddingVertical: 10,
   },
 
   row: {
@@ -108,7 +108,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     width: '60%',
-    paddingVertical: 15,
+    paddingVertical: 10,
   },
 
   main: {
