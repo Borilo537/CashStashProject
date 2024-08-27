@@ -6,6 +6,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { useIsFocused } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import MaskInput, { Masks } from 'react-native-mask-input';
 
 export default function DateAdd({ navigation }) {
   const isFocused = useIsFocused();
@@ -16,24 +17,7 @@ export default function DateAdd({ navigation }) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [dias, setDays] = useState([]);
 
-  const [number, setNumber] = useState('');
-
-  const handleNumberChange = (text) => {
-
-    let soNumeros = text.replace(/[^0-9.]/g, '');
-
-    const parts = soNumeros.split('.');
-
-    if (parts.length > 2) {
-      soNumeros = parts[0] + '.' + parts.slice(1).join('');
-    }
-
-    if (parts[1] && parts[1].length > 2) {
-      soNumeros = parts[0] + '.' + parts[1].substring(0, 2);
-    }
-
-    setNumber(soNumeros);
-  };
+  const [money, setMoney] = React.useState('');
 
   const homePress = () => {
     navigation.navigate('Home');
@@ -143,15 +127,19 @@ export default function DateAdd({ navigation }) {
                 }}
               />
             </View>
-            <TextInput
-              keyboardType="numeric"  // Exibe o teclado numérico
-              style={styles.inputDataPreco}
-              placeholder='Ex: 15,00'
-              placeholderTextColor={'rgba(255, 255, 255, 0.8)'}
-              value={number}
-              onChangeText={handleNumberChange}
-            />
+            <MaskInput
+            style={styles.inputDataPreco}
+              value={money}
+              onChangeText={(masked, unmasked) => {
+                setMoney(masked); // you can use the unmasked value as well
 
+                // assuming you typed "9" all the way:
+                console.log(masked); // (99) 99999-9999
+                console.log(unmasked); // 99999999999
+              }}
+
+              mask={Masks.BRL_CURRENCY}
+            />
           </View>
         </View>
 
