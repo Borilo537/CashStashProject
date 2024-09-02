@@ -128,14 +128,12 @@ export default function DateAdd({ navigation }) {
               />
             </View>
             <MaskInput
-            style={styles.inputDataPreco}
+              style={styles.inputDataPreco}
               value={money}
               onChangeText={(masked, unmasked) => {
-                setMoney(masked); // you can use the unmasked value as well
-
-                // assuming you typed "9" all the way:
-                console.log(masked); // (99) 99999-9999
-                console.log(unmasked); // 99999999999
+                setMoney(masked);
+                console.log(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
+                console.log('parsefloat', parseFloat(money))
               }}
 
               mask={Masks.BRL_CURRENCY}
