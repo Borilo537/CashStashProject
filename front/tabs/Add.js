@@ -5,6 +5,7 @@ import { styles } from '../styles/addStyle';
 import { api } from "../services/api";
 import { emailLoggado } from './Login';
 import { useIsFocused } from '@react-navigation/native';
+import MaskInput, { Masks } from 'react-native-mask-input';
 
 
 export default function Add({ navigation }) {
@@ -14,6 +15,8 @@ export default function Add({ navigation }) {
     const [gasto, setGasto] = useState('');
 
     const isFocused = useIsFocused();
+
+    const [money, setMoney] = React.useState('');
 
     useEffect(() => {
         api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
@@ -30,14 +33,18 @@ export default function Add({ navigation }) {
         })
     }, [emailLoggado, isFocused])
 
+    useEffect(() => {
+        setGastado(parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
+    })
+
 
     const handleSubmit = async (e) => {
         let valorComparar = parseFloat(gasto) + parseFloat(gastado)
 
-        if (valorComparar > showLimite){
+        if (valorComparar > showLimite) {
             setIsModalVisible(true)
         }
-        else if(valorComparar < showLimite){
+        else if (valorComparar < showLimite) {
             setIsModalVisible(false)
             alert('Gasto Adicionado!')
 
@@ -46,17 +53,17 @@ export default function Add({ navigation }) {
                 gastado,
                 emailLoggado
             };
-    
+
             await api.post("/gastos/update", data);
-    
+
             api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
                 console.log('VAPO', res.data.data[0].gastado)
                 setGasto(res.data.data[0].gastado);
             })
-    
+
             setGastado('')
-    
-      
+
+
         }
 
 
@@ -81,13 +88,9 @@ export default function Add({ navigation }) {
 
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
-
-
-
                 <TouchableOpacity onPress={homePress}>
                     <ImageBackground source={require('../assets/arrow.png')} style={styles.voltar}></ImageBackground>
                 </TouchableOpacity>
-
 
                 <View style={styles.header}>
                     <Modal
@@ -102,28 +105,28 @@ export default function Add({ navigation }) {
                                 <Text style={styles.alertText}>Este gasto excede seu limite, deseja continuar?</Text>
                                 <View style={styles.buttonContainer}>
                                     <Text style={styles.button}
-                                    onPress={async(e) => {
-                                        setIsModalVisible(false)
-                                        alert('Gasto Adicionado!')
-                            
-                                        e.preventDefault();
-                                        const data = {
-                                            gastado,
-                                            emailLoggado
-                                        };
-                                
-                                        await api.post("/gastos/update", data);
-                                
-                                        api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
-                                            console.log('VAPO', res.data.data[0].gastado)
-                                            setGasto(res.data.data[0].gastado);
-                                        })
-                                
-                                        setGastado('')
-                                
-                                    }}>Continuar</Text>
+                                        onPress={async (e) => {
+                                            setIsModalVisible(false)
+                                            alert('Gasto Adicionado!')
+
+                                            e.preventDefault();
+                                            const data = {
+                                                gastado,
+                                                emailLoggado
+                                            };
+
+                                            await api.post("/gastos/update", data);
+
+                                            api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+                                                console.log('VAPO', res.data.data[0].gastado)
+                                                setGasto(res.data.data[0].gastado);
+                                            })
+
+                                            setGastado('')
+
+                                        }}>Continuar</Text>
                                     <Text style={styles.button2}
-                                    onPress={() => setIsModalVisible(false)}
+                                        onPress={() => setIsModalVisible(false)}
                                     >Cancelar</Text>
                                 </View>
                             </View>
@@ -138,13 +141,17 @@ export default function Add({ navigation }) {
                     <View style={styles.input}>
                         <Text style={styles.inputLabel}>Adicionar gasto</Text>
 
-                        <TextInput
+                        <MaskInput
                             style={styles.inputControl}
-                            placeholder='Ex: 15,00'
-                            placeholderTextColor={'white'}
-                            value={gastado}
-                            onChangeText={setGastado}
+                            value={money}
+                            onChangeText={(masked, unmasked) => {
+                                setMoney(masked);
+                                console.log('parsefloat', parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
+                                setGastado(parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
+                                console.log('gastado', gastado)
+                            }}
 
+                            mask={Masks.BRL_CURRENCY}
                         />
 
                         <Text style={styles.inputExtra}>R$ {gasto} gastos de R$ {showLimite}</Text>

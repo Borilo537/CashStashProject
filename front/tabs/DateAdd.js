@@ -132,8 +132,7 @@ export default function DateAdd({ navigation }) {
               value={money}
               onChangeText={(masked, unmasked) => {
                 setMoney(masked);
-                console.log(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
-                console.log('parsefloat', parseFloat(money))
+                console.log('parsefloat', parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
               }}
 
               mask={Masks.BRL_CURRENCY}

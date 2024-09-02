@@ -16,21 +16,23 @@ CREATE TABLE limite (
 	email VARCHAR(255) NOT NULL UNIQUE
 );
 
-INSERT INTO limite (valor) VALUE (0);
-
 SELECT * FROM limite;
-
-update limite set valor = 200 where email = 'a@a.com';
-
-insert into user_account(id,name,email,password) values(1,'paulo','paulo@e.com','1234');
 
 CREATE TABLE gastos (
 	gastado FLOAT NOT NULL,
 	email VARCHAR(255) NOT NULL UNIQUE
 );
 
-INSERT INTO gastos (gastado) VALUE (5);
+SELECT * FROM gastos;
+
+CREATE TABLE datas (
+	name VARCHAR(255),
+    month VARCHAR(255),
+    day VARCHAR(255),
+    price FLOAT,
+    email VARCHAR(255) NOT NULL UNIQUE
+);
 
 SELECT * FROM gastos;
 
-UPDATE gastos SET gastado = 5;
+
