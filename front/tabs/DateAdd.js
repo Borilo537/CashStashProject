@@ -9,7 +9,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
 import { api } from "../services/api";
-import { emailLoggado } from './Login';
+// import { emailLoggado } from './Login';
+let emailLoggado = 'e@e.com'
 
 export default function DateAdd({ navigation }) {
   const isFocused = useIsFocused();
@@ -33,15 +34,22 @@ export default function DateAdd({ navigation }) {
 
     let preco = parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
 
+    let month = selectedMonth
+    let day = selectedDay
+
+
     const data = {
       name,
-      selectedMonth,
-      selectedDay,
+      month,
+      day,
       preco,
       emailLoggado,
     };
 
-    await api.post("/date/add", data);
+    const response = await api.post("/date/add", data);
+
+    alert(`Success: ${response.data.message || 'Data added successfully!'}`);
+
   };
 
   const handlePress = () => {

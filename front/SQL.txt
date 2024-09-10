@@ -30,9 +30,8 @@ CREATE TABLE datas (
     month VARCHAR(255),
     day VARCHAR(255),
     price FLOAT,
-    email VARCHAR(255) NOT NULL UNIQUE
+    email VARCHAR(255) NOT NULL
 );
 
 SELECT * FROM datas;
-
 

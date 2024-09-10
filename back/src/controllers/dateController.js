@@ -2,7 +2,7 @@
 const connection = require('../config/db');
 
 
-async function adicionarData(request, response) {
+async function addDate(request, response) {
 
     const query = 'INSERT INTO datas(name, month, day, price, email) VALUES(?, ?, ?, ?, ?);';
 
@@ -10,8 +10,8 @@ async function adicionarData(request, response) {
         request.body.name,
         request.body.month,
         request.body.day,
-        request.body.price,
-        request.body.email,
+        request.body.preco,
+        request.body.emailLoggado,
     );
 
     
@@ -22,7 +22,7 @@ async function adicionarData(request, response) {
                     .status(201)
                     .json({
                         success: true,
-                        message: `Sucesso! Usuário cadastrado.`,
+                        message: `Sua data foi adicionada!`,
                         data: results
                     });
             } else {
@@ -49,5 +49,5 @@ async function adicionarData(request, response) {
 
 
 module.exports = {
-    adicionarData
+    addDate
 }

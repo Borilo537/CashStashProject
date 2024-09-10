@@ -6,7 +6,7 @@ const router = Router();
 
 const { 
    addDate,
-} = require('../controllers/addController')
+} = require('../controllers/dateController')
 
 
 router.post('/date/add', addDate);
