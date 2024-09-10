@@ -33,6 +33,6 @@ CREATE TABLE datas (
     email VARCHAR(255) NOT NULL UNIQUE
 );
 
-SELECT * FROM gastos;
+SELECT * FROM datas;
 
 

@@ -8,23 +8,40 @@ import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
+import { api } from "../services/api";
+import { emailLoggado } from './Login';
+
 export default function DateAdd({ navigation }) {
   const isFocused = useIsFocused();
-
 
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedDay, setSelectedDay] = useState(null);
   const [dias, setDays] = useState([]);
+  const [name, setName] = useState('');
 
   const [money, setMoney] = React.useState('');
 
   const homePress = () => {
     navigation.navigate('Home');
+    console.log('money', money)
   };
 
-  const editPress = () => {
-    navigation.navigate('EditLimit');
+  const addButton = async (e) => {
+
+    e.preventDefault();
+
+    let preco = parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
+
+    const data = {
+      name,
+      selectedMonth,
+      selectedDay,
+      preco,
+      emailLoggado,
+    };
+
+    await api.post("/date/add", data);
   };
 
   const handlePress = () => {
@@ -84,6 +101,8 @@ export default function DateAdd({ navigation }) {
               style={styles.inputData}
               placeholder='NovaData1'
               placeholderTextColor={'rgba(255, 255, 255, 0.8)'}
+              value={name}
+              onChangeText={setName}
             />
 
             <View style={styles.row}>
@@ -140,7 +159,7 @@ export default function DateAdd({ navigation }) {
           </View>
         </View>
 
-        <TouchableOpacity onPress={homePress} style={styles.touch}>
+        <TouchableOpacity onPress={addButton} style={styles.touch}>
         </TouchableOpacity>
         <View style={styles.main}>
           <Text style={styles.mainText}>Adicionar</Text>

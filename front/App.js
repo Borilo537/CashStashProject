@@ -32,7 +32,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Login');
+  const [initialRoute, setInitialRoute] = useState('DateAdd');
 
 
   return (
@@ -93,8 +93,7 @@ function HomeScreen({ navigation }) {
   useEffect(() => {
     api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
       console.log('VAPO', res.data.data[0].gastado)
-      setGasto((res.data.data[0].gastado));
-      console.log('parsefloat', parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
+      setGasto(res.data.data[0].gastado.toString().replace('.', ','));
     })
   }, [emailLoggado, isFocused])
 
