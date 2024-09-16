@@ -10,7 +10,8 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 
 import { api } from "../services/api";
 // import { emailLoggado } from './Login';
-let emailLoggado = 'e@e.com'
+
+import { emailLoggado } from './Login';
 
 export default function DateAdd({ navigation }) {
   const isFocused = useIsFocused();
@@ -34,7 +35,7 @@ export default function DateAdd({ navigation }) {
 
     let preco = parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
 
-    let month = selectedMonth
+    let month = meses.find(m => m.value === selectedMonth)?.abb; // Converte o valor numérico em abreviação
     let day = selectedDay
 
 
@@ -58,19 +59,20 @@ export default function DateAdd({ navigation }) {
   };
 
   const meses = [
-    { label: 'Janeiro', value: '1' },
-    { label: 'Fevereiro', value: '2' },
-    { label: 'Março', value: '3' },
-    { label: 'Abril', value: '4' },
-    { label: 'Maio', value: '5' },
-    { label: 'Junho', value: '6' },
-    { label: 'Julho', value: '7' },
-    { label: 'Agosto', value: '8' },
-    { label: 'Setembro', value: '9' },
-    { label: 'Outubro', value: '10' },
-    { label: 'Novembro', value: '11' },
-    { label: 'Dezembro', value: '12' },
+    { label: 'Janeiro', value: '1', abb: 'Jan' },
+    { label: 'Fevereiro', value: '2', abb: 'Fev' },
+    { label: 'Março', value: '3', abb: 'Mar' },
+    { label: 'Abril', value: '4', abb: 'Abr' },
+    { label: 'Maio', value: '5', abb: 'Mai' },
+    { label: 'Junho', value: '6', abb: 'Jun' },
+    { label: 'Julho', value: '7', abb: 'Jul' },
+    { label: 'Agosto', value: '8', abb: 'Ago' },
+    { label: 'Setembro', value: '9', abb: 'Set' },
+    { label: 'Outubro', value: '10', abb: 'Out' },
+    { label: 'Novembro', value: '11', abb: 'Nov' },
+    { label: 'Dezembro', value: '12', abb: 'Dez' },
   ];
+  
 
   const getDaysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();

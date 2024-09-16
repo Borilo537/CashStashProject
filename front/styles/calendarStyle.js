@@ -91,7 +91,19 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
   },
+  eventoBox: {
+    backgroundColor: '#ffffff',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 8,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  eventText: {
+    fontSize: 16,
+    color: '#333',
+  },
 
 
-  
+
 });

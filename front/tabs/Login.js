@@ -5,7 +5,7 @@ import { styles } from '../styles/loginStyle.js';
 
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
-let emailLoggado = 'a@a.com'
+let emailLoggado
 
 export default function Login({ navigation }) {
 
