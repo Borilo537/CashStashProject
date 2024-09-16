@@ -26,10 +26,10 @@ CREATE TABLE gastos (
 SELECT * FROM gastos;
 
 CREATE TABLE datas (
-	name VARCHAR(255),
-    month VARCHAR(255),
-    day VARCHAR(255),
-    price FLOAT,
+	name VARCHAR(255) NOT NULL,
+    month VARCHAR(255) NOT NULL,
+    day VARCHAR(255) NOT NULL,
+    price FLOAT NOT NULL,
     email VARCHAR(255) NOT NULL
 );
 
