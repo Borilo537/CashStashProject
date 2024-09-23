@@ -97,6 +97,35 @@ function HomeScreen({ navigation }) {
     })
   }, [emailLoggado, isFocused])
 
+  const [datas, setDatas] = useState([]);
+
+  const fetchDatas = async () => {
+    try {
+      const res = await api.get(`/date/select?email=${emailLoggado}`);
+      if (res.data && res.data.data) {
+        let resposta = res.data.data;
+        let lista = [];
+
+        resposta.sort((a, b) => {
+          if (a.month === b.month) {
+            return a.day - b.day;
+          }
+          return a.month - b.month;
+        });
+
+        setDatas(resposta);
+
+        console.log('res', res.data.data);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar as datas:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDatas();
+  }, [isFocused]);
+
 
   return (
 
@@ -226,22 +255,24 @@ function HomeScreen({ navigation }) {
             </View>
           </TouchableOpacity>
 
-          <View style={styles.dateContainer}>
-            <Text style={styles.dateName}>Presente pro Caio</Text>
-            <Text style={styles.dateDay}>14 Mai.</Text>
-          </View>
-
-          <View style={styles.dateContainer}>
-            <Text style={styles.dateName2}>Mensalidade academia</Text>
-            <Text style={styles.dateDay2}>21 Jun.</Text>
-          </View>
-
-          <View style={styles.dateContainer}>
-            <Text style={styles.dateName3}>Mercado</Text>
-            <Text style={styles.dateDay3}>24 Jun.</Text>
-          </View>
-
-
+          {(datas.map((data, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dateContainer
+              ]}
+            >
+              <Text style={[
+                styles.dateName,
+                index === 0 && { color: lightGreen, opacity: 1 }
+              ]}>{data.name}</Text>
+              <Text style={[
+                styles.dateDay,
+                index === 0 && { color: lightGreen, opacity: 1 }
+              ]}>{data.day}/{data.month}</Text>
+            </View>
+          ))
+          )}
 
           <StatusBar style="light" />
 

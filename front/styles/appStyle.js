@@ -275,9 +275,10 @@ export const styles = StyleSheet.create({
   },
 
   dateName: {
-    color: lightGreen,
+    color: 'white',
     height: '100%',
     fontSize: 16,
+    opacity: 0.5,
     fontWeight: '600',
     display: 'flex',
     justifyContent: 'center',
@@ -286,9 +287,10 @@ export const styles = StyleSheet.create({
   },
 
   dateDay: {
-    color: lightGreen,
+    color: 'white',
     height: '100%',
     fontSize: 16,
+    opacity: 0.5,
     fontWeight: '600',
     display: 'flex',
     justifyContent: 'center',
@@ -296,49 +298,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  dateName2: {
-    opacity: 0.5,
-    color: 'white',
-    height: '100%',
-    fontSize: 16,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-
-  dateDay2: {
-    opacity: 0.5,
-    color: 'white',
-    height: '100%',
-    fontSize: 16,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-
-  dateName3: {
-    opacity: 0.5,
-    color: 'white',
-    height: '100%',
-    fontSize: 16,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-
-  dateDay3: {
-    opacity: 0.5,
-    color: 'white',
-    height: '100%',
-    fontSize: 16,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
 
   topContainer: {
     width: '100%',

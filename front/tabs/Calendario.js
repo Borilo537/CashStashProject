@@ -26,7 +26,7 @@ export default function Calendario({ navigation }) {
                     return a.month - b.month; 
                 });
                 
-                setDatas(resposta);  // Atualiza a lista ordenada
+                setDatas(resposta);  
                 
                 console.log('res', res.data.data);
             }

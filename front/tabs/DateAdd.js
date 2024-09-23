@@ -30,11 +30,10 @@ export default function DateAdd({ navigation }) {
   };
 
   const addButton = async (e) => {
-    e.preventDefault();
 
     let preco = parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
 
-    
+
     let day = parseInt(selectedDay);
 
     const data = {
@@ -49,12 +48,7 @@ export default function DateAdd({ navigation }) {
 
     alert(`Success: ${response.data.message || 'Data added successfully!'}`);
 
-
-  };
-
-  const handlePress = () => {
-    console.log('wvwqv');
-    setShowLimite(showLimite);
+    navigation.navigate('Calendario');
   };
 
   const meses = [
@@ -71,7 +65,7 @@ export default function DateAdd({ navigation }) {
     { label: 'Novembro', value: 11, abb: 'Nov' },
     { label: 'Dezembro', value: 12, abb: 'Dez' },
   ];
-  
+
 
   const getDaysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
