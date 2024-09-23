@@ -24,24 +24,22 @@ export default function DateAdd({ navigation }) {
 
   const [money, setMoney] = React.useState('');
 
-  const homePress = () => {
-    navigation.navigate('Home');
+  const calendarPress = () => {
+    navigation.navigate('Calendario');
     console.log('money', money)
   };
 
   const addButton = async (e) => {
-
     e.preventDefault();
 
     let preco = parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
 
-    let month = meses.find(m => m.value === selectedMonth)?.abb; // Converte o valor numérico em abreviação
-    let day = selectedDay
-
+    
+    let day = parseInt(selectedDay);
 
     const data = {
       name,
-      month,
+      selectedMonth,
       day,
       preco,
       emailLoggado,
@@ -51,6 +49,7 @@ export default function DateAdd({ navigation }) {
 
     alert(`Success: ${response.data.message || 'Data added successfully!'}`);
 
+
   };
 
   const handlePress = () => {
@@ -59,18 +58,18 @@ export default function DateAdd({ navigation }) {
   };
 
   const meses = [
-    { label: 'Janeiro', value: '1', abb: 'Jan' },
-    { label: 'Fevereiro', value: '2', abb: 'Fev' },
-    { label: 'Março', value: '3', abb: 'Mar' },
-    { label: 'Abril', value: '4', abb: 'Abr' },
-    { label: 'Maio', value: '5', abb: 'Mai' },
-    { label: 'Junho', value: '6', abb: 'Jun' },
-    { label: 'Julho', value: '7', abb: 'Jul' },
-    { label: 'Agosto', value: '8', abb: 'Ago' },
-    { label: 'Setembro', value: '9', abb: 'Set' },
-    { label: 'Outubro', value: '10', abb: 'Out' },
-    { label: 'Novembro', value: '11', abb: 'Nov' },
-    { label: 'Dezembro', value: '12', abb: 'Dez' },
+    { label: 'Janeiro', value: 1, abb: 'Jan' },
+    { label: 'Fevereiro', value: 2, abb: 'Fev' },
+    { label: 'Março', value: 3, abb: 'Mar' },
+    { label: 'Abril', value: 4, abb: 'Abr' },
+    { label: 'Maio', value: 5, abb: 'Mai' },
+    { label: 'Junho', value: 6, abb: 'Jun' },
+    { label: 'Julho', value: 7, abb: 'Jul' },
+    { label: 'Agosto', value: 8, abb: 'Ago' },
+    { label: 'Setembro', value: 9, abb: 'Set' },
+    { label: 'Outubro', value: 10, abb: 'Out' },
+    { label: 'Novembro', value: 11, abb: 'Nov' },
+    { label: 'Dezembro', value: 12, abb: 'Dez' },
   ];
   
 
@@ -99,7 +98,7 @@ export default function DateAdd({ navigation }) {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.header}>
           <View style={styles.topContentIcons}>
-            <TouchableOpacity onPress={homePress}>
+            <TouchableOpacity onPress={calendarPress}>
               <AntDesign name="left" size={25} color="white" />
             </TouchableOpacity>
             <Text style={styles.topText}>Adicionar data</Text>

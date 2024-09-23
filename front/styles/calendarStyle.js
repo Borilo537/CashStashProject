@@ -91,17 +91,35 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
   },
-  eventoBox: {
-    backgroundColor: '#ffffff',
+  eventosContainer: {
+    backgroundColor: normalGreen,
     padding: 10,
     marginVertical: 5,
     borderRadius: 8,
-    width: '90%',
+    width: '100%',
+    height: 70,
     alignSelf: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+
   },
-  eventText: {
-    fontSize: 16,
-    color: '#333',
+
+  eventosText: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: '600',
+  },
+
+  eventosDados: {
+    fontSize: 18,
+    color: 'white',
+    fontWeight: '400',
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center',
   },
 
 

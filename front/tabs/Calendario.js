@@ -4,30 +4,40 @@ import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextI
 import { styles } from '../styles/calendarStyle';
 import { api } from "../services/api";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
 
 import { emailLoggado } from './Login';
 
 export default function Calendario({ navigation }) {
-    const [datas, setDatas] = useState([]);  // Estado para armazenar as datas
-    const [loading, setLoading] = useState(true);
+    const isFocused = useIsFocused();
+    const [datas, setDatas] = useState([]);
 
     const fetchDatas = async () => {
         try {
             const res = await api.get(`/date/select?email=${emailLoggado}`);
-            // Certifique-se de acessar a chave correta no retorno
             if (res.data && res.data.data) {
-                setDatas(res.data.data);  // Definindo o array de datas
+                let resposta = res.data.data;
+                let lista = [];
+
+                resposta.sort((a, b) => {
+                    if (a.month === b.month) {
+                        return a.day - b.day;  
+                    }
+                    return a.month - b.month; 
+                });
+                
+                setDatas(resposta);  // Atualiza a lista ordenada
+                
+                console.log('res', res.data.data);
             }
-            setLoading(false);  // Desliga o indicador de carregamento
         } catch (error) {
             console.error('Erro ao buscar as datas:', error);
-            setLoading(false);  // Desliga o indicador de carregamento mesmo em erro
         }
     };
 
     useEffect(() => {
-        fetchDatas();  // Chama a função ao carregar a tela
-    }, []);
+        fetchDatas();
+    }, [isFocused]);
 
     const homePress = () => {
         navigation.navigate('Home');
@@ -53,16 +63,22 @@ export default function Calendario({ navigation }) {
                 </TouchableOpacity>
                 <View style={styles.header}>
                     <Text style={styles.headText}>Suas datas</Text>
-                    {loading ? (
-                        <Text>Carregando...</Text>
-                    ) : (
-                        datas.map((data, index) => (
-                            <View key={index} style={styles.eventoBox}>
-                                <Text style={styles.eventText}>
-                                    {data.name} - {data.day}/{data.month} - R$ {data.price.toFixed(2)}
-                                </Text>
-                            </View>
-                        ))
+                    {(datas.map((data, index) => (
+                        <View
+                            key={index}
+                            style={[
+                                styles.eventosContainer,
+                                index === 0 && { backgroundColor: lightGreen } // Estilo condicional
+                            ]}
+                        >
+                            <Text style={styles.eventosText}>
+                                {data.name}
+                            </Text>
+                            <Text style={styles.eventosDados}>
+                                {data.day}/{data.month} - R$ {data.price.toFixed(2)}
+                            </Text>
+                        </View>
+                    ))
                     )}
                 </View>
 

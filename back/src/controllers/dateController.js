@@ -8,7 +8,7 @@ async function addDate(request, response) {
 
     const params = Array(
         request.body.name,
-        request.body.month,
+        request.body.selectedMonth,
         request.body.day,
         request.body.preco,
         request.body.emailLoggado,
