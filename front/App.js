@@ -23,6 +23,9 @@ import Limit from './tabs/Limit';
 import EditLimit from './tabs/EditLimit';
 import Calendario from './tabs/Calendario';
 import DateAdd from './tabs/DateAdd'
+import MetaAdd from './tabs/MetaAdd'
+import MetaMenu from './tabs/MetaMenu'
+import Account from './tabs/Account'
 
 import { api } from "./services/api";
 import { emailLoggado } from './tabs/Login';
@@ -32,7 +35,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Calendario');
+  const [initialRoute, setInitialRoute] = useState('Account');
 
 
   return (
@@ -44,7 +47,10 @@ export default function Home() {
         <Stack.Screen name="EditLimit" component={EditLimit} options={{ headerShown: false }} />
         <Stack.Screen name="Calendario" component={Calendario} options={{ headerShown: false }} />
         <Stack.Screen name="DateAdd" component={DateAdd} options={{ headerShown: false }} />
+        <Stack.Screen name="MetaAdd" component={MetaAdd} options={{ headerShown: false }} />
+        <Stack.Screen name="MetaMenu" component={MetaMenu} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Account" component={Account} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -76,6 +82,11 @@ function HomeScreen({ navigation }) {
   const calendarioPress = () => {
     navigation.navigate('Calendario');
   };
+
+  const metaPress = () => {
+    navigation.navigate('MetaMenu');
+  }
+  
 
   const handlePress = () => {
     Linking.openURL('https://exemplo.com');
@@ -166,7 +177,9 @@ function HomeScreen({ navigation }) {
                   <TouchableOpacity onPress={() => { limitPress(); setIsModalVisible(false); }}>
                     <Text style={styles.menuText}>Limite de gastos</Text>
                   </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { metaPress(); setIsModalVisible(false); }}>
                   <Text style={styles.menuText}>Metas</Text>
+                  </TouchableOpacity>
                   <TouchableOpacity onPress={() => { calendarioPress(); setIsModalVisible(false); }}>
                     <Text style={styles.menuText}>Calendário</Text>
                   </TouchableOpacity>
