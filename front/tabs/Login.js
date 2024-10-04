@@ -1,13 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useContext, AsyncStorage } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles/loginStyle.js';
+import { useIsFocused } from '@react-navigation/native';
 
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import { api } from "../services/api";
 
-let emailLoggado = 'a@a.com'
+let emailLoggado
+
+let CurrentID
 
 export default function Login({ navigation }) {
+  const isFocused = useIsFocused
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +22,6 @@ export default function Login({ navigation }) {
   };
 
 
-
   const handleSubmit = async function () {
     console.log('email:', email, 'senha:', password)
 
@@ -26,11 +29,19 @@ export default function Login({ navigation }) {
       email,
       password,
     };
+
     const response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: { "Content-type": "application/json;charset=UTF-8" },
       body: JSON.stringify(data)
     })
+
+
+    api.get(`/auth/idCheck?email=${emailLoggado}`).then((res) => {
+      console.log('VAPO', res.data.data[0])
+      CurrentID = res.data
+    })
+
 
 
     let content = await response.json();
@@ -50,12 +61,6 @@ export default function Login({ navigation }) {
     }
 
   };
-
-  // const handleKeyDown = (event) => {
-  //   if (event.nativeEvent.key === 'Enter') {
-  //     handleSubmit();
-  //   }
-  // };
 
   return (
 
@@ -149,3 +154,4 @@ export const useEmail = () => {
 };
 
 export { emailLoggado }
+

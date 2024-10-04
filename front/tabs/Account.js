@@ -17,24 +17,23 @@ import MaskInput, { Masks } from "react-native-mask-input";
 export default function MetaAdd({ navigation }) {
   const [money, setMoney] = React.useState("");
 
-  const handlePress = () => {
-    console.log("wvwqv");
-  };
+
 
   const homePress = () => {
     navigation.navigate("Home");
     tion.navigate("Home");
   };
 
-  const metaAddPress = () => {
-    navigation.navigate("MetaAdd");
-  };
+
 
   return (
     <View style={styles.body}>
       <View style={styles.statusBG}></View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.Main}>
+          <TouchableOpacity onPress={homePress} style={{alignSelf: 'flex-start'}}>
+            <ImageBackground source={require('../assets/arrow.png')} style={styles.voltar}></ImageBackground>
+          </TouchableOpacity>
           <View style={styles.profileContainer}>
             <ImageBackground
               source={require("../assets/profile.png")}

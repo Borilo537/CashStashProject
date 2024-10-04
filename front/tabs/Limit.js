@@ -10,7 +10,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { emailLoggado } from './Login';
+import { CurrentID } from '../App';
 
 export default function Limit({ navigation }) {
 

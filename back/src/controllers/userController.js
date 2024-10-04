@@ -1,7 +1,6 @@
 
 const connection = require('../config/db');
 
-
 async function storeUser(request, response) {
 
     const query = 'INSERT INTO user_account(name, email, password) VALUES(?, ?, ?);';
@@ -12,7 +11,6 @@ async function storeUser(request, response) {
         request.body.password,
     );
 
-    
     connection.query(query, params, (err, results) => {
         try {
             if (results) {

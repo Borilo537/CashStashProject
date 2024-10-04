@@ -48,9 +48,9 @@ async function addDate(request, response) {
 
 
 async function selectDate(request, response) {
-    const query = 'SELECT name, month, day, price FROM datas WHERE email = ?';
+    const query = 'SELECT name, month, day, price FROM datas WHERE id = ?';
     
-    const params = [request.query['email']];
+    const params = [request.query['id']];
 
     connection.query(query, params, (err, results) => {
         try {

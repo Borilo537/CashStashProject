@@ -44,10 +44,10 @@ async function updateGastos(request, response) {
 
 
 async function selectGastos(request, response) {
-    const query = 'SELECT gastado FROM gastos WHERE email = ?;';
+    const query = 'SELECT gastado FROM gastos WHERE id = ?;';
     
     const params = Array(
-        request.query['email']
+        request.query['id']
     );
     
     connection.query(query, params, (err, results) => {

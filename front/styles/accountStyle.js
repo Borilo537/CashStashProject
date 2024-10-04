@@ -29,12 +29,19 @@ export const styles = StyleSheet.create({
     paddingBottom: 220,
   },
 
+  voltar: {
+    width: 20,
+    height: 20,
+    marginLeft: 10,
+    transform: 'rotate(180deg)',
+  },
+
   Main: {
     width: '100%',
     height: 600,
-    paddingTop: 40,
+    paddingTop: 20,
     padding: 20,
-    marginTop: 90,
+    marginTop: 40,
     display: 'flex',
     flexDirection: 'column',
     gap: 30,

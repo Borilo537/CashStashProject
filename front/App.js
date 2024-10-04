@@ -1,14 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect, AsyncStorage } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, Modal } from 'react-native';
 import { styles } from './styles/appStyle';
-
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
-
-
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -27,15 +24,18 @@ import MetaAdd from './tabs/MetaAdd'
 import MetaMenu from './tabs/MetaMenu'
 import Account from './tabs/Account'
 
+
 import { api } from "./services/api";
 import { emailLoggado } from './tabs/Login';
-
 
 const Stack = createStackNavigator();
 
 
+
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Account');
+  const [initialRoute, setInitialRoute] = useState('Login');
+  const isFocused = useIsFocused
+
 
 
   return (
@@ -72,6 +72,7 @@ function HomeScreen({ navigation }) {
   };
 
   const limitPress = () => {
+    console.log('ID ATUAL', CurrentID)
     navigation.navigate('Limit');
   };
 
@@ -86,10 +87,11 @@ function HomeScreen({ navigation }) {
   const metaPress = () => {
     navigation.navigate('MetaMenu');
   }
-  
+
 
   const handlePress = () => {
     Linking.openURL('https://exemplo.com');
+    console.log('IDE',CurrentID)
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -102,7 +104,7 @@ function HomeScreen({ navigation }) {
   const [gasto, setGasto] = useState('0');
 
   useEffect(() => {
-    api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+    api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
       console.log('VAPO', res.data.data[0].gastado)
       setGasto(res.data.data[0].gastado.toString().replace('.', ','));
     })
@@ -112,7 +114,7 @@ function HomeScreen({ navigation }) {
 
   const fetchDatas = async () => {
     try {
-      const res = await api.get(`/date/select?email=${emailLoggado}`);
+      const res = await api.get(`/date/select?id=${CurrentID}`);
       if (res.data && res.data.data) {
         let resposta = res.data.data;
         let lista = [];
@@ -178,7 +180,7 @@ function HomeScreen({ navigation }) {
                     <Text style={styles.menuText}>Limite de gastos</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => { metaPress(); setIsModalVisible(false); }}>
-                  <Text style={styles.menuText}>Metas</Text>
+                    <Text style={styles.menuText}>Metas</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => { calendarioPress(); setIsModalVisible(false); }}>
                     <Text style={styles.menuText}>Calendário</Text>
@@ -296,3 +298,5 @@ function HomeScreen({ navigation }) {
 
   );
 }
+
+export { CurrentID }
