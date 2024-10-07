@@ -12,6 +12,7 @@
 	SELECT * FROM user_account;
 
 	CREATE TABLE limite (
+		id INT,
 		valor FLOAT NOT NULL,
 		FOREIGN KEY (id) REFERENCES user_account(id)
 	);
@@ -19,6 +20,7 @@
 	SELECT * FROM limite;
 
 	CREATE TABLE gastos (
+		id INT,
 		gastado FLOAT NOT NULL,
 		FOREIGN KEY (id) REFERENCES user_account(id)
 	);
@@ -26,6 +28,7 @@
 	SELECT * FROM gastos;
 
 	CREATE TABLE datas (
+		id INT,
 		name VARCHAR(255) NOT NULL,
 		month VARCHAR(255) NOT NULL,
 		day VARCHAR(255) NOT NULL,
