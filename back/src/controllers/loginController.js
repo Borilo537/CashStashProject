@@ -2,17 +2,15 @@ const connection = require('../config/db');
 require("dotenv").config();
 
 async function idCheck(request, response) {
-
     const params = [
-        request.query['id']
+        request.query.email
     ];
 
     const query = "SELECT id FROM user_account WHERE email = ?";
 
-
     connection.query(query, params, (err, results) => {
         try {
-            if (results) {
+            if (results && results.length > 0) {
                 response
                     .status(201)
                     .json({
@@ -25,18 +23,16 @@ async function idCheck(request, response) {
                     .status(400)
                     .json({
                         success: false,
-                        message: `Não foi possível realizar o cadastro. Verifique os dados informados`,
-                        query: err.sql,
-                        sqlMessage: err.sqlMessage
+                        message: `Nenhum ID encontrado para o email fornecido.`
                     });
             }
         } catch (e) { 
             response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
+                success: false,
+                message: "Ocorreu um erro. Não foi possível coletar o ID!",
+                query: err ? err.sql : '',
+                sqlMessage: err ? err.sqlMessage : ''
+            });
         }
     });
 }

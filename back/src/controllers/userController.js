@@ -43,14 +43,13 @@ async function storeUser(request, response) {
 }
 
 async function userLimit(request, response) {
+    const query = 'INSERT INTO limite(id, valor, email) VALUES(?, 500, ?);';
 
-    const query = 'INSERT INTO limite(valor, email) VALUES(500, ?);';
+    const params = [
+        request.body.CurrentID,  
+        request.body.email       
+    ];
 
-    const params = Array(
-        request.body.email,
-    );
-
-    
     connection.query(query, params, (err, results) => {
         try {
             if (results) {
@@ -71,22 +70,23 @@ async function userLimit(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { 
+        } catch (e) {
             response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
+                success: false,
+                message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
+                query: err.sql,
+                sqlMessage: err.sqlMessage
+            });
         }
     });
 }
 
 async function userGasto(request, response) {
 
-    const query = 'INSERT INTO gastos(gastado, email) VALUES(0, ?);';
+    const query = 'INSERT INTO gastos(id, gastado, email) VALUES(?, 0, ?);';
 
     const params = Array(
+        request.body.CurrentID,
         request.body.email,
     );
 

@@ -7,7 +7,6 @@ import { useIsFocused } from '@react-navigation/native';
 import { api } from "../services/api";
 
 let emailLoggado
-
 let CurrentID
 
 export default function Login({ navigation }) {
@@ -36,17 +35,25 @@ export default function Login({ navigation }) {
       body: JSON.stringify(data)
     })
 
-
-    api.get(`/auth/idCheck?email=${emailLoggado}`).then((res) => {
-      console.log('VAPO', res.data.data[0])
-      CurrentID = res.data
-    })
-
+    api.get(`/auth/idCheck?email=${email}`).then((res) => {
+      console.log('VAPO', res.data.data[0].id);
+      CurrentID = res.data.data[0].id;
+    });
 
 
     let content = await response.json();
 
     if (content.success) {
+      console.log('content sucess', CurrentID)
+      const limitData = {
+        CurrentID,
+        email
+      };
+
+      setTimeout(async () => {
+        await api.post("/user/createLimit", limitData);
+        await api.post("/user/createGasto", limitData);
+      }, 100);
 
       console.log("emailLogado", email)
       emailLoggado = email
@@ -154,4 +161,5 @@ export const useEmail = () => {
 };
 
 export { emailLoggado }
+export { CurrentID }
 

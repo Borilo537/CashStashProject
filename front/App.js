@@ -27,6 +27,7 @@ import Account from './tabs/Account'
 
 import { api } from "./services/api";
 import { emailLoggado } from './tabs/Login';
+import { CurrentID } from './tabs/Login';
 
 const Stack = createStackNavigator();
 
@@ -60,7 +61,6 @@ export default function Home() {
 
 
 function HomeScreen({ navigation }) {
-  console.log('BABABOI', emailLoggado)
   const isFocused = useIsFocused();
 
   const registerPress = () => {
@@ -97,15 +97,12 @@ function HomeScreen({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const lightGreen = '#009443';
-  const normalGreen = '#2b3b29';
-  const darkerGreen = '#182117';
-  const darkGreen = '#0d120c';
 
   const [gasto, setGasto] = useState('0');
 
   useEffect(() => {
-    api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
-      console.log('VAPO', res.data.data[0].gastado)
+    api.get(`/gastos/select`).then((res) => {
+      console.log('GASTADO', res.data.data[0].gastado)
       setGasto(res.data.data[0].gastado.toString().replace('.', ','));
     })
   }, [emailLoggado, isFocused])
@@ -298,5 +295,3 @@ function HomeScreen({ navigation }) {
 
   );
 }
-
-export { CurrentID }

@@ -13,7 +13,6 @@ const {
 router.post('/user/create', storeUser);
 router.post('/user/createLimit', userLimit);
 router.post('/user/createGasto', userGasto);
-// router.put('/user/:id', updateUser);
-// router.delete('/user/:id', deleteUser);
+
 
 module.exports = router;

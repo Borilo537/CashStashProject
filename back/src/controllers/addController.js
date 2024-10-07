@@ -47,7 +47,7 @@ async function selectGastos(request, response) {
     const query = 'SELECT gastado FROM gastos WHERE id = ?;';
     
     const params = Array(
-        request.query['id']
+        request.body.CurrentID,
     );
     
     connection.query(query, params, (err, results) => {

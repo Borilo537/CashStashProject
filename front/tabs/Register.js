@@ -4,6 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 import { styles } from '../styles/loginStyle.js';
 import { api } from "../services/api";
 
+
+
+
 export default function Register({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -21,20 +24,21 @@ export default function Register({ navigation }) {
       return;
     }
 
+
+
+    emailLoggado = email
+
     e.preventDefault();
     const data = {
       name,
       email,
       password,
     };
-    const limitData = {
-      email
-    }
+
 
     await api.post("/user/create", data);
-    await api.post("/user/createLimit", limitData);
-    await api.post("/user/createGasto", limitData);
-    navigation.navigate('Home');
+
+    navigation.navigate('Login');
     alert("Usuário criado com sucesso!");
   };
 
