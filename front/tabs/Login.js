@@ -36,7 +36,6 @@ export default function Login({ navigation }) {
     })
 
     api.get(`/auth/idCheck?email=${email}`).then((res) => {
-      console.log('VAPO', res.data.data[0].id);
       CurrentID = res.data.data[0].id;
     });
 
@@ -50,10 +49,9 @@ export default function Login({ navigation }) {
         email
       };
 
-      setTimeout(async () => {
-        await api.post("/user/createLimit", limitData);
-        await api.post("/user/createGasto", limitData);
-      }, 100);
+      await api.post("/user/createLimit", limitData);
+      await api.post("/user/createGasto", limitData);
+
 
       console.log("emailLogado", email)
       emailLoggado = email

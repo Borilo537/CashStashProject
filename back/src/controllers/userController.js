@@ -42,8 +42,8 @@ async function storeUser(request, response) {
     });
 }
 
-async function userLimit(request, response) {
-    const query = 'INSERT INTO limite(id, valor, email) VALUES(?, 500, ?);';
+async function createLimit(request, response) {
+    const query = 'INSERT INTO limite(id, valor) VALUES(?, 500);';
 
     const params = [
         request.body.CurrentID,  
@@ -83,7 +83,7 @@ async function userLimit(request, response) {
 
 async function userGasto(request, response) {
 
-    const query = 'INSERT INTO gastos(id, gastado, email) VALUES(?, 0, ?);';
+    const query = 'INSERT INTO gastos(id, gastado) VALUES(?, 0);';
 
     const params = Array(
         request.body.CurrentID,
@@ -125,7 +125,7 @@ async function userGasto(request, response) {
 
 module.exports = {
     storeUser,
-    userLimit,
+    createLimit,
     userGasto
 
 }
