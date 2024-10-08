@@ -12,7 +12,8 @@
 	SELECT * FROM user_account;
 
 	CREATE TABLE limite (
-		id INT,
+		id INT NOT NULL,
+		email VARCHAR(255) NOT NULL UNIQUE,
 		valor FLOAT NOT NULL,
 		FOREIGN KEY (id) REFERENCES user_account(id)
 	);
@@ -20,7 +21,8 @@
 	SELECT * FROM limite;
 
 	CREATE TABLE gastos (
-		id INT,
+		id INT NOT NULL,
+		email VARCHAR(255) NOT NULL UNIQUE,
 		gastado FLOAT NOT NULL,
 		FOREIGN KEY (id) REFERENCES user_account(id)
 	);

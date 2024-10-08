@@ -44,13 +44,6 @@ export default function Login({ navigation }) {
 
     if (content.success) {
       console.log('content sucess', CurrentID)
-      const limitData = {
-        CurrentID,
-        email
-      };
-
-      await api.post("/user/createLimit", limitData);
-      await api.post("/user/createGasto", limitData);
 
 
       console.log("emailLogado", email)
