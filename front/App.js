@@ -26,7 +26,6 @@ import Account from './tabs/Account'
 
 
 import { api } from "./services/api";
-import { emailLoggado } from './tabs/Login';
 import { CurrentID } from './tabs/Login';
 
 const Stack = createStackNavigator();
@@ -89,23 +88,20 @@ function HomeScreen({ navigation }) {
   }
 
 
-  const handlePress = () => {
-    Linking.openURL('https://exemplo.com');
-    console.log('IDE',CurrentID)
-  };
-
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const lightGreen = '#009443';
 
   const [gasto, setGasto] = useState('0');
 
+  console.log('ID ATUAL NO APP: ', CurrentID)
+
   useEffect(() => {
     api.get(`/gastos/select`).then((res) => {
       console.log('GASTADO', res.data.data[0].gastado)
       setGasto(res.data.data[0].gastado.toString().replace('.', ','));
     })
-  }, [emailLoggado, isFocused])
+  }, [CurrentID, isFocused])
 
   const [datas, setDatas] = useState([]);
 

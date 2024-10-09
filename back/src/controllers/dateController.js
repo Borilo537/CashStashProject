@@ -50,7 +50,9 @@ async function addDate(request, response) {
 async function selectDate(request, response) {
     const query = 'SELECT name, month, day, price FROM datas WHERE id = ?';
     
-    const params = [request.query['id']];
+    const params = [
+        request.body.CurrentID
+    ];
 
     connection.query(query, params, (err, results) => {
         try {

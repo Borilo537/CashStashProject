@@ -14,6 +14,7 @@ export default function Login({ navigation }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [id, setId] = useState(0);
 
 
   const registerPress = () => {
@@ -22,42 +23,36 @@ export default function Login({ navigation }) {
 
 
   const handleSubmit = async function () {
-    console.log('email:', email, 'senha:', password)
-
+    console.log('email:', email, 'senha:', password);
+  
     const data = {
       email,
       password,
     };
-
+  
     const response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: { "Content-type": "application/json;charset=UTF-8" },
-      body: JSON.stringify(data)
-    })
-
-    api.get(`/auth/idCheck?email=${email}`).then((res) => {
-      CurrentID = res.data.data[0].id;
+      body: JSON.stringify(data),
     });
-
-
+  
     let content = await response.json();
-
+  
     if (content.success) {
-      console.log('content sucess', CurrentID)
-
-
-      console.log("emailLogado", email)
-      emailLoggado = email
-
-
+      const idResponse = await api.get(`/auth/idCheck?email=${email}`);
+      const fetchedId = idResponse.data.data[0].id;
+      console.log('puxando ID', fetchedId);
+      setId(fetchedId);
+      
+      emailLoggado = email;
+      CurrentID = fetchedId;
+  
       alert(content.message);
       navigation.navigate('Home');
-
     } else {
-      console.log('ERROOO')
+      console.log('ERROOO');
       alert(content.message);
     }
-
   };
 
   return (

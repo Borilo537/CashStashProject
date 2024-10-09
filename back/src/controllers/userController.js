@@ -81,11 +81,11 @@ async function createLimit(request, response) {
 }
 
 async function createGasto(request, response) {
-
     const query = 'INSERT INTO gastos(email, gastado) VALUES(?, 0);';
 
-    const params = [request.body.email];
-
+    const params = [
+        request.body.email
+    ];
 
     connection.query(query, params, (err, results) => {
         try {
@@ -109,7 +109,7 @@ async function createGasto(request, response) {
             }
         } catch (e) {
             response.status(400).json({
-                succes: false,
+                success: false,
                 message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
                 query: err.sql,
                 sqlMessage: err.sqlMessage
@@ -117,6 +117,7 @@ async function createGasto(request, response) {
         }
     });
 }
+
 
 
 module.exports = {

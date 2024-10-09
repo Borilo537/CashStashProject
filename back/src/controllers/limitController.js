@@ -1,4 +1,3 @@
-
 const connection = require('../config/db');
 
 
@@ -12,7 +11,7 @@ async function updateLimit(request, response) {
         request.body.emailLoggado,
     );
 
-    
+
     connection.query(query, params, (err, results) => {
         try {
             if (results) {
@@ -35,22 +34,22 @@ async function updateLimit(request, response) {
             }
         } catch (e) { // Caso aconteça algum erro na execução
             response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
+                succes: false,
+                message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
+                query: err.sql,
+                sqlMessage: err.sqlMessage
+            });
         }
     });
 }
 
 
 async function selectLimit(request, response) {
-    const query = 'SELECT valor FROM limite WHERE email = ?;';
-    
-    const params = Array(
-        request.query['email']
-    );
+    const query = 'SELECT valor FROM limite WHERE id = ?;';
+
+    const params = [
+        request.body.CurrentID
+    ];
 
     connection.query(query, params, (err, results) => {
         try {
@@ -75,15 +74,15 @@ async function selectLimit(request, response) {
                         sqlMessage: err
                     });
             }
-        } catch (e) { 
+        } catch (e) {
             console.log("ERRO CATCH", e)
 
             response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: e.sql,
-                    sqlMessage: e.sqlMessage
-                });
+                succes: false,
+                message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
+                query: e.sql,
+                sqlMessage: e.sqlMessage
+            });
         }
     });
 }
