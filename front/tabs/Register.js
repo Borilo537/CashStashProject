@@ -34,11 +34,11 @@ export default function Register({ navigation }) {
       email,
       password,
     };
-
+    const limitData = { email };
 
     await api.post("/user/create", data);
-    await api.post("/user/createLimit");
-    await api.post("/user/createGasto");
+    await api.post("/user/createLimit", limitData);
+    await api.post("/user/createGasto", email);
 
 
     navigation.navigate('Login');

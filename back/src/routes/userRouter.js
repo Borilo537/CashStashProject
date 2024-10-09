@@ -6,7 +6,7 @@ const router = Router();
 const { 
     storeUser,
     createLimit,
-    userGasto
+    createGasto
 } = require('../controllers/userController')
 
 // Criar os endpoints (rotas) que serão acessados a partir dos métodos HTTP (get,post,put,delete)

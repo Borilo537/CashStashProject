@@ -31,13 +31,13 @@ async function storeUser(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { 
+        } catch (e) {
             response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
+                succes: false,
+                message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
+                query: err.sql,
+                sqlMessage: err.sqlMessage
+            });
         }
     });
 }
@@ -46,7 +46,7 @@ async function createLimit(request, response) {
     const query = 'INSERT INTO limite(email, valor) VALUES(?, 500);';
 
     const params = [
-        request.body.email       
+        request.body.email
     ];
 
     connection.query(query, params, (err, results) => {
@@ -84,11 +84,9 @@ async function createGasto(request, response) {
 
     const query = 'INSERT INTO gastos(email, gastado) VALUES(?, 0);';
 
-    const params = Array(
-        request.body.email,
-    );
+    const params = [request.body.email];
 
-    
+
     connection.query(query, params, (err, results) => {
         try {
             if (results) {
@@ -109,13 +107,13 @@ async function createGasto(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { 
+        } catch (e) {
             response.status(400).json({
-                    succes: false,
-                    message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
+                succes: false,
+                message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
+                query: err.sql,
+                sqlMessage: err.sqlMessage
+            });
         }
     });
 }
@@ -125,5 +123,4 @@ module.exports = {
     storeUser,
     createLimit,
     createGasto
-
 }
