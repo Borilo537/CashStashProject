@@ -10,7 +10,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { CurrentID } from '../App';
+import { CurrentID } from './Login';
 
 export default function Limit({ navigation }) {
 
@@ -19,20 +19,20 @@ export default function Limit({ navigation }) {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
+    api.get(`/limit/select?id=${CurrentID}`).then((res) => {
       setShowLimite(res.data.data[0].valor);
     })
-  }, [emailLoggado, isFocused])
+  }, [CurrentID, isFocused])
 
   
   const [gasto, setGasto] = useState('wqgwq');
 
   useEffect(() => {
-    api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+    api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
         console.log('VAPO',res.data.data[0].gastado)
         setGasto(res.data.data[0].gastado);
     })
-}, [emailLoggado, isFocused])
+}, [CurrentID, isFocused])
 
   const homePress = () => {
     navigation.navigate('Home');

@@ -11,7 +11,7 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 import { api } from "../services/api";
 // import { emailLoggado } from './Login';
 
-import { emailLoggado } from './Login';
+import { CurrentID } from './Login';
 
 export default function DateAdd({ navigation }) {
   const isFocused = useIsFocused();
@@ -41,7 +41,7 @@ export default function DateAdd({ navigation }) {
       selectedMonth,
       day,
       preco,
-      emailLoggado,
+      CurrentID,
     };
 
     const response = await api.post("/date/add", data);

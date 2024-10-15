@@ -4,14 +4,14 @@ const connection = require('../config/db');
 
 async function addDate(request, response) {
 
-    const query = 'INSERT INTO datas(name, month, day, price, email) VALUES(?, ?, ?, ?, ?);';
+    const query = 'INSERT INTO datas(name, month, day, price, id) VALUES(?, ?, ?, ?, ?);';
 
     const params = Array(
         request.body.name,
         request.body.selectedMonth,
         request.body.day,
         request.body.preco,
-        request.body.emailLoggado,
+        request.body.CurrentID,
     );
 
 
@@ -51,7 +51,7 @@ async function selectDate(request, response) {
     const query = 'SELECT name, month, day, price FROM datas WHERE id = ?';
     
     const params = [
-        request.body.CurrentID
+        request.query.id
     ];
 
     connection.query(query, params, (err, results) => {
@@ -59,7 +59,7 @@ async function selectDate(request, response) {
             if (results) {
                 response.status(200).json({
                     success: true,
-                    data: results,  // Deve retornar apenas os resultados
+                    data: results,
                 });
             } else {
                 response.status(400).json({

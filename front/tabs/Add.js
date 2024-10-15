@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput, Modal } from 'react-native';
 import { styles } from '../styles/addStyle';
 import { api } from "../services/api";
-import { emailLoggado } from './Login';
 import { useIsFocused } from '@react-navigation/native';
 import MaskInput, { Masks } from 'react-native-mask-input';
-
+import { CurrentID } from './Login';
 
 export default function Add({ navigation }) {
     const [gastado, setGastado] = useState('');
@@ -19,19 +18,18 @@ export default function Add({ navigation }) {
     const [money, setMoney] = React.useState('');
 
     useEffect(() => {
-        api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
-            console.log('VAPO', res.data.data[0].gastado)
+        api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
             setGasto(res.data.data[0].gastado);
         })
-    }, [emailLoggado, isFocused])
+    }, [CurrentID, isFocused])
 
     const [showLimite, setShowLimite] = useState(0);
 
     useEffect(() => {
-        api.get(`/limit/select?email=${emailLoggado}`).then((res) => {
+        api.get(`/limit/select?id=${CurrentID}`).then((res) => {
             setShowLimite(res.data.data[0].valor);
         })
-    }, [emailLoggado, isFocused])
+    }, [CurrentID, isFocused])
 
     useEffect(() => {
         setGastado(parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
@@ -41,22 +39,26 @@ export default function Add({ navigation }) {
     const handleSubmit = async (e) => {
         let valorComparar = parseFloat(gasto) + parseFloat(gastado)
 
+
         if (valorComparar > showLimite) {
             setIsModalVisible(true)
         }
         else if (valorComparar < showLimite) {
             setIsModalVisible(false)
             alert('Gasto Adicionado!')
+            console.log('gastado', gastado)
+            console.log('current', CurrentID)
 
             e.preventDefault();
+
             const data = {
                 gastado,
-                emailLoggado
+                CurrentID
             };
 
             await api.post("/gastos/update", data);
 
-            api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+            api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
                 console.log('VAPO', res.data.data[0].gastado)
                 setGasto(res.data.data[0].gastado);
             })
@@ -112,12 +114,12 @@ export default function Add({ navigation }) {
                                             e.preventDefault();
                                             const data = {
                                                 gastado,
-                                                emailLoggado
+                                                CurrentID
                                             };
 
                                             await api.post("/gastos/update", data);
 
-                                            api.get(`/gastos/select?email=${emailLoggado}`).then((res) => {
+                                            api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
                                                 console.log('VAPO', res.data.data[0].gastado)
                                                 setGasto(res.data.data[0].gastado);
                                             })
@@ -148,7 +150,6 @@ export default function Add({ navigation }) {
                                 setMoney(masked);
                                 console.log('parsefloat', parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
                                 setGastado(parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.')))
-                                console.log('gastado', gastado)
                             }}
 
                             mask={Masks.BRL_CURRENCY}

@@ -6,7 +6,7 @@ import { api } from "../services/api";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useIsFocused } from '@react-navigation/native';
 
-import { emailLoggado } from './Login';
+import { CurrentID } from './Login';
 
 export default function Calendario({ navigation }) {
     const isFocused = useIsFocused();
@@ -14,10 +14,10 @@ export default function Calendario({ navigation }) {
 
     const fetchDatas = async () => {
         try {
-            const res = await api.get(`/date/select?email=${emailLoggado}`);
+            const res = await api.get(`/date/select?id=${CurrentID}`);
             if (res.data && res.data.data) {
+                console.log('aqui', res.data.data)
                 let resposta = res.data.data;
-                let lista = [];
 
                 resposta.sort((a, b) => {
                     if (a.month === b.month) {
@@ -26,7 +26,7 @@ export default function Calendario({ navigation }) {
                     return a.month - b.month; 
                 });
                 
-                setDatas(resposta);  
+                setDatas(resposta);
                 
                 console.log('res', res.data.data);
             }
@@ -50,6 +50,7 @@ export default function Calendario({ navigation }) {
 
     const lightGreen = '#009443';
     const darkGreen = '#0d120c';
+    const monthNames = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
     return (
 
@@ -63,19 +64,21 @@ export default function Calendario({ navigation }) {
                 </TouchableOpacity>
                 <View style={styles.header}>
                     <Text style={styles.headText}>Suas datas</Text>
-                    {(datas.map((data, index) => (
+                    {
+                    
+                    (datas.map((data, index) => (
                         <View
                             key={index}
                             style={[
                                 styles.eventosContainer,
-                                index === 0 && { backgroundColor: lightGreen } // Estilo condicional
+                                index === 0 && { backgroundColor: lightGreen }
                             ]}
                         >
                             <Text style={styles.eventosText}>
                                 {data.name}
                             </Text>
                             <Text style={styles.eventosDados}>
-                                {data.day}/{data.month} - R$ {data.price.toFixed(2)}
+                                {data.day} de {monthNames[data.month - 1]}   R$ {data.price.toFixed(2)}
                             </Text>
                         </View>
                     ))

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, Modal } from 'react-native';
+import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, Modal, Linking } from 'react-native';
 import { styles } from './styles/appStyle';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,7 +23,6 @@ import DateAdd from './tabs/DateAdd'
 import MetaAdd from './tabs/MetaAdd'
 import MetaMenu from './tabs/MetaMenu'
 import Account from './tabs/Account'
-
 
 import { api } from "./services/api";
 import { CurrentID } from './tabs/Login';
@@ -57,8 +56,6 @@ export default function Home() {
   );
 }
 
-
-
 function HomeScreen({ navigation }) {
   const isFocused = useIsFocused();
 
@@ -71,7 +68,6 @@ function HomeScreen({ navigation }) {
   };
 
   const limitPress = () => {
-    console.log('ID ATUAL', CurrentID)
     navigation.navigate('Limit');
   };
 
@@ -87,30 +83,32 @@ function HomeScreen({ navigation }) {
     navigation.navigate('MetaMenu');
   }
 
+  const handlePress = () => {
+    Linking.content()
+  }
+
+
 
   const [isModalVisible, setIsModalVisible] = useState(false)
-
   const lightGreen = '#009443';
-
-  const [gasto, setGasto] = useState('0');
-
-  console.log('ID ATUAL NO APP: ', CurrentID)
+  const [gasto, setGasto] = useState(5);
 
   useEffect(() => {
-    api.get(`/gastos/select`).then((res) => {
-      console.log('GASTADO', res.data.data[0].gastado)
-      setGasto(res.data.data[0].gastado.toString().replace('.', ','));
+    api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
+      setGasto(res.data.data[0].gastado);
     })
   }, [CurrentID, isFocused])
 
+
   const [datas, setDatas] = useState([]);
+
+  const monthNames = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
   const fetchDatas = async () => {
     try {
       const res = await api.get(`/date/select?id=${CurrentID}`);
       if (res.data && res.data.data) {
         let resposta = res.data.data;
-        let lista = [];
 
         resposta.sort((a, b) => {
           if (a.month === b.month) {
@@ -277,7 +275,7 @@ function HomeScreen({ navigation }) {
               <Text style={[
                 styles.dateDay,
                 index === 0 && { color: lightGreen, opacity: 1 }
-              ]}>{data.day}/{data.month}</Text>
+              ]}>{data.day} de {monthNames[data.month - 1]}</Text>
             </View>
           ))
           )}
