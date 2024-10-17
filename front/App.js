@@ -32,7 +32,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Login');
+  const [initialRoute, setInitialRoute] = useState('MetaMenu');
   const isFocused = useIsFocused
 
 

@@ -61,7 +61,7 @@ export default function Register({ navigation }) {
       }}>
         <View style={styles.header}>
           <View style={styles.logoContainer}>
-            <ImageBackground source={require('../assets/logo3.png')} style={styles.logo}></ImageBackground>
+            <ImageBackground ImageBackgroundsource={require('../assets/logo3.png')} style={styles.logo}></ImageBackground>
           </View>
           <Text style={styles.loginTitle}>Entre no CashStash</Text>
           <Text style={styles.loginText}>Tenha controle sobre seu dinheiro</Text>
