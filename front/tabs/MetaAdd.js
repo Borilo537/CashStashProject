@@ -21,12 +21,18 @@ export default function MetaAdd({ navigation }) {
     console.log("wvwqv");
   };
 
+  const metaMenuPress = () => {
+    navigation.navigate("MetaMenu");
+  };
+
   return (
     <View style={styles.body}>
       <View style={styles.statusBG}></View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.Head}>
-          <AntDesign name="left" size={25} color="white" />
+          <TouchableOpacity onPress={metaMenuPress}>
+            <AntDesign name="left" size={25} color="white" />
+          </TouchableOpacity>
           <Text style={styles.HeadText}>CRIE UMA NOVA META</Text>
         </View>
         <View style={styles.Main}>

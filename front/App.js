@@ -32,29 +32,47 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('MetaMenu');
+  const [initialRoute, setInitialRoute] = useState('Login');
   const isFocused = useIsFocused
 
 
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={initialRoute}>
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Add" component={Add} options={{ headerShown: false }} />
-        <Stack.Screen name="Limit" component={Limit} options={{ headerShown: false }} />
-        <Stack.Screen name="EditLimit" component={EditLimit} options={{ headerShown: false }} />
-        <Stack.Screen name="Calendario" component={Calendario} options={{ headerShown: false }} />
-        <Stack.Screen name="DateAdd" component={DateAdd} options={{ headerShown: false }} />
-        <Stack.Screen name="MetaAdd" component={MetaAdd} options={{ headerShown: false }} />
-        <Stack.Screen name="MetaMenu" component={MetaMenu} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Account" component={Account} options={{ headerShown: false }} />
-        <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+      <Stack.Navigator
+        initialRouteName={initialRoute}
+        screenOptions={{
+          headerShown: false,
+          animationEnabled: true,
+          cardStyleInterpolator: ({ current, layouts }) => {
+            const translateX = current.progress.interpolate({
+              inputRange: [0, 1],
+              outputRange: [layouts.screen.width, 0], // Tela atual desliza para a esquerda
+            });
+
+            return {
+              cardStyle: {
+                transform: [{ translateX }],
+              },
+            };
+          },
+        }}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Add" component={Add} />
+        <Stack.Screen name="Limit" component={Limit} />
+        <Stack.Screen name="EditLimit" component={EditLimit} />
+        <Stack.Screen name="Calendario" component={Calendario} />
+        <Stack.Screen name="DateAdd" component={DateAdd} />
+        <Stack.Screen name="MetaAdd" component={MetaAdd} />
+        <Stack.Screen name="MetaMenu" component={MetaMenu} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Account" component={Account} />
+        <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 function HomeScreen({ navigation }) {
   const isFocused = useIsFocused();
@@ -214,7 +232,7 @@ function HomeScreen({ navigation }) {
         <View style={styles.line}></View>
 
         <View style={styles.main}>
-          <TouchableOpacity onPress={handlePress}>
+          <TouchableOpacity onPress={metaPress}>
             <View style={styles.metasContainer}>
               <Text style={styles.metasText}>Suas Metas</Text>
               <Entypo name="chevron-right" size={30} color="white" />

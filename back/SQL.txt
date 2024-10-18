@@ -14,7 +14,7 @@
 	CREATE TABLE limite (
 		id INT auto_increment PRIMARY KEY,
 		email VARCHAR(255) NOT NULL UNIQUE,
-		valor FLOAT NOT NULL,
+		valor FLOAT NOT NULL
 	);
 
 	SELECT * FROM limite;
@@ -22,7 +22,7 @@
 	CREATE TABLE gastos (
 		id INT auto_increment PRIMARY KEY,
 		email VARCHAR(255) NOT NULL UNIQUE,
-		gastado FLOAT NOT NULL,
+		gastado FLOAT NOT NULL
 	);
 
 	SELECT * FROM gastos;
@@ -32,7 +32,7 @@
 		name VARCHAR(255) NOT NULL,
 		month VARCHAR(255) NOT NULL,
 		day VARCHAR(255) NOT NULL,
-		price FLOAT NOT NULL,
+		price FLOAT NOT NULL
 	);
 
 	SELECT * FROM datas;

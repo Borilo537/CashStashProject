@@ -19,7 +19,6 @@ export default function MetaAdd({ navigation }) {
 
   const homePress = () => {
     navigation.navigate("Home");
-    tion.navigate("Home");
   };
 
   const metaAddPress = () => {
