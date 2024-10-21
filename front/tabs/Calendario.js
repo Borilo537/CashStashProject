@@ -21,13 +21,13 @@ export default function Calendario({ navigation }) {
 
                 resposta.sort((a, b) => {
                     if (a.month === b.month) {
-                        return a.day - b.day;  
+                        return a.day - b.day;
                     }
-                    return a.month - b.month; 
+                    return a.month - b.month;
                 });
-                
+
                 setDatas(resposta);
-                
+
                 console.log('res', res.data.data);
             }
         } catch (error) {
@@ -65,27 +65,32 @@ export default function Calendario({ navigation }) {
                 <View style={styles.header}>
                     <Text style={styles.headText}>Suas datas</Text>
                     {
-                    
-                    (datas.map((data, index) => (
-                        <View
-                            key={index}
-                            style={[
-                                styles.eventosContainer,
-                                index === 0 && { backgroundColor: lightGreen }
-                            ]}
-                        >
-                            <Text style={styles.eventosText}>
-                                {data.name}
-                            </Text>
-                            <Text style={styles.eventosDados}>
-                                {data.day} de {monthNames[data.month - 1]}   R$ {data.price.toFixed(2)}
-                            </Text>
-                        </View>
-                    ))
-                    )}
-                </View>
 
-            </ScrollView>
+                        (datas.map((data, index) => (
+                            <View
+                                key={index}
+                                style={[
+                                    styles.eventosContainer,
+                                    index === 0 && { backgroundColor: lightGreen }
+                                ]}
+                            >
+                                <Text style={styles.eventosText}>
+                                    {data.name}
+                                </Text>
+                                <Text style={styles.eventosDados}>
+                                    <View>{data.day} de {monthNames[data.month - 1]}</View>
+                                    <View>{data.price % 1 === 0
+                                        ? `R$ ${data.price.toFixed(0)}`
+                                        : `R$ ${data.price.toFixed(2).replace('.', ',')}`}
+                                    </View>
+                                </Text>
+                            </View>
+                        ))
+                        )
+                    }
+                </View >
+
+            </ScrollView >
             <LinearGradient
                 colors={['transparent', darkGreen]}
                 style={styles.main}>
@@ -98,7 +103,7 @@ export default function Calendario({ navigation }) {
 
             <StatusBar style="light" />
 
-        </View>
+        </View >
 
     );
 }

@@ -97,18 +97,20 @@ export const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 8,
     width: '100%',
-    height: 70,
     alignSelf: 'center',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-
+    paddingVertical: 15,
+    gap: 10,
+    flexWrap: 'nowrap',
   },
 
   eventosText: {
     fontSize: 20,
+    width: 'auto',
     color: 'white',
     fontWeight: '600',
   },
@@ -118,8 +120,12 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '400',
     display: 'flex',
-    height: '100%',
     alignItems: 'center',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    columnGap: 15,
+    rowGap: 2,
   },
 
 
