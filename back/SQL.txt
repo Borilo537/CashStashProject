@@ -37,3 +37,11 @@
 
 	SELECT * FROM datas;
 
+	CREATE TABLE metas (
+		id INT,
+		name VARCHAR(255) NOT NULL,
+		valor FLOAT NOT NULL,
+        acumulado FLOAT NOT NULL
+	);
+
+	SELECT * FROM metas;

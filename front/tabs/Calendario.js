@@ -78,11 +78,11 @@ export default function Calendario({ navigation }) {
                                     {data.name}
                                 </Text>
                                 <Text style={styles.eventosDados}>
-                                    <View>{data.day} de {monthNames[data.month - 1]}</View>
-                                    <View>{data.price % 1 === 0
+                                    <Text>{data.day} de {monthNames[data.month - 1]}</Text>
+                                    <Text>{data.price % 1 === 0
                                         ? `R$ ${data.price.toFixed(0)}`
                                         : `R$ ${data.price.toFixed(2).replace('.', ',')}`}
-                                    </View>
+                                    </Text>
                                 </Text>
                             </View>
                         ))
