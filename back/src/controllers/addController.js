@@ -30,20 +30,20 @@ async function updateGastos(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { 
+        } catch (e) {
             console.log("erro total")
             response.status(400).json({
-                    success: false,
-                    message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
+                success: false,
+                message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
+                query: err.sql,
+                sqlMessage: err.sqlMessage
+            });
         }
     });
 }
 
 const selectGastos = (request, response) => {
-    const query = 'SELECT gastado FROM gastos WHERE id = ?'; 
+    const query = 'SELECT gastado FROM gastos WHERE id = ?';
 
     const params = Array(
         request.query.id
@@ -82,10 +82,7 @@ const selectGastos = (request, response) => {
             });
         }
     });
-  };
-  
-
-
+};
 
 module.exports = {
     updateGastos,
