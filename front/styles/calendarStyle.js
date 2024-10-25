@@ -120,13 +120,28 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '400',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'flex-end',
     columnGap: 15,
     rowGap: 2,
+    textAlign: 'right',
+    minWidth: 85,
   },
+
+  confirm: {
+    backgroundColor: lightGreen,
+    width: 42,
+    height: 42,
+    position: 'absolute',
+    right: 0,
+    marginRight: -22,
+    borderRadius: '50%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 
 
 
