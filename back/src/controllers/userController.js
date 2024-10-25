@@ -1,4 +1,3 @@
-
 const connection = require('../config/db');
 
 async function storeUser(request, response) {

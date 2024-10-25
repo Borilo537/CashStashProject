@@ -105,8 +105,6 @@ function HomeScreen({ navigation }) {
     Linking.content()
   }
 
-
-
   const [isModalVisible, setIsModalVisible] = useState(false)
   const lightGreen = '#009443';
   const [gasto, setGasto] = useState(5);
@@ -148,6 +146,8 @@ function HomeScreen({ navigation }) {
     fetchDatas();
   }, [isFocused]);
 
+  const dataAtual = new Date()
+  console.log('data atual é: ', dataAtual.getMonth());
 
   return (
 

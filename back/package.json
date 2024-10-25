@@ -10,6 +10,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "nodemon src/server.js",
+    "env": "node src/createEnv.js"
   }
 }
