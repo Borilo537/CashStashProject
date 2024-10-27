@@ -146,9 +146,6 @@ function HomeScreen({ navigation }) {
     fetchDatas();
   }, [isFocused]);
 
-  const dataAtual = new Date()
-  console.log('data atual é: ', dataAtual.getMonth());
-
   return (
 
     <View style={styles.body}>

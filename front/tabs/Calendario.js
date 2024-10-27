@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
-import { Text, View, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import { styles } from '../styles/calendarStyle';
 import { api } from "../services/api";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -19,18 +19,10 @@ export default function Calendario({ navigation }) {
 
     const fetchExpiredDatas = async () => {
         try {
-            const res = await api.get(`/date/selectExpired?id=${CurrentID}&month=${CurrentMonth}`);
+            const res = await api.get(`/date/selectExpired?id=${CurrentID}`);
             if (res.data && res.data.data) {
                 console.log('MES PASSADO', res.data.data)
                 let resposta = res.data.data;
-
-                resposta.sort((a, b) => {
-                    if (a.month === b.month) {
-                        return a.day - b.day;
-                    }
-                    return a.month - b.month;
-                });
-
                 setExpired(resposta);
             }
         } catch (error) {
@@ -41,16 +33,17 @@ export default function Calendario({ navigation }) {
 
     const fetchDatas = async () => {
         try {
-            const res = await api.get(`/date/select?id=${CurrentID}&month=${CurrentMonth}`);
+            const res = await api.get(`/date/select?id=${CurrentID}`);
             if (res.data && res.data.data) {
-                console.log('MES PRESENTE', res.data.data)
-                let resposta = res.data.data;
+                console.log('MES PRESENTE', res.data.data);
 
-                resposta.sort((a, b) => {
-                    if (a.month === b.month) {
-                        return a.day - b.day;
-                    }
-                    return a.month - b.month;
+                const today = new Date();
+
+                let resposta = res.data.data.sort((a, b) => {
+                    const dateA = new Date(a.data);
+                    const dateB = new Date(b.data);
+
+                    return Math.abs(dateA - today) - Math.abs(dateB - today);
                 });
 
                 setDatas(resposta);
@@ -93,57 +86,70 @@ export default function Calendario({ navigation }) {
                 <View style={styles.header}>
                     <Text style={styles.headText}>Suas datas</Text>
                     {
-                        (expired.map((data, index) => (
-                            <View
-                                key={index}
-                                style={[
-                                    styles.eventosContainer,
-                                    {
-                                        backgroundColor: expiredColor,
-                                        width: '95%',
-                                        alignSelf: 'flex-start'
-                                    }
-                                ]}
-                            >
-                                <Text style={[styles.eventosText, { color: expiredText }]}>
-                                    {data.name}
-                                </Text>
-                                <Text style={[styles.eventosDados, { color: expiredText, marginRight: 20 }]}>
-                                    <Text>{data.day} de {monthNames[data.month - 1]}</Text>
-                                    <Text>{data.price % 1 === 0
-                                        ? `R$ ${data.price.toFixed(0)}`
-                                        : `R$ ${data.price.toFixed(2).replace('.', ',')}`}
+                        expired.map((data, index) => {
+                            const date = new Date(data.data);
+                            const day = date.getDate();
+                            const month = date.getMonth() + 1;
+
+                            return (
+                                <View
+                                    key={index}
+                                    style={[
+                                        styles.eventosContainer,
+                                        {
+                                            backgroundColor: expiredColor,
+                                            width: '95%',
+                                            alignSelf: 'flex-start'
+                                        }
+                                    ]}
+                                >
+                                    <Text style={[styles.eventosText, { color: expiredText }]}>
+                                        {data.name}
                                     </Text>
-                                </Text>
-                                <View style={styles.confirm}>
-                                    <FontAwesome5 name="check" size={20} color="white" />
+                                    <Text style={[styles.eventosDados, { color: expiredText, marginRight: 20 }]}>
+                                        <Text>{day} de {monthNames[month - 1]}</Text>
+                                        <Text>
+                                            {data.price % 1 === 0
+                                                ? `R$ ${data.price.toFixed(0)}`
+                                                : `R$ ${data.price.toFixed(2).replace('.', ',')}`}
+                                        </Text>
+                                    </Text>
+                                    <View style={styles.confirm}>
+                                        <FontAwesome5 name="check" size={20} color="white" />
+                                    </View>
                                 </View>
-                            </View>
-                        ))
-                        )
+                            );
+                        })
                     }
                     {
-                        (datas.map((data, index) => (
-                            <View
-                                key={index}
-                                style={[
-                                    styles.eventosContainer,
-                                    index === 0 && { backgroundColor: lightGreen }
-                                ]}
-                            >
-                                <Text style={styles.eventosText}>
-                                    {data.name}
-                                </Text>
-                                <Text style={styles.eventosDados}>
-                                    <Text>{data.day} de {monthNames[data.month - 1]}</Text>
-                                    <Text>{data.price % 1 === 0
-                                        ? `R$ ${data.price.toFixed(0)}`
-                                        : `R$ ${data.price.toFixed(2).replace('.', ',')}`}
+                        datas.map((data, index) => {
+                            const date = new Date(data.data); // Converter string de data para objeto Date
+                            const day = date.getDate();
+                            const month = date.getMonth() + 1;
+                            const year = date.getFullYear();
+
+                            return (
+                                <View
+                                    key={index}
+                                    style={[
+                                        styles.eventosContainer,
+                                        index === 0 && { backgroundColor: lightGreen }
+                                    ]}
+                                >
+                                    <Text style={styles.eventosText}>
+                                        {data.name}
                                     </Text>
-                                </Text>
-                            </View>
-                        ))
-                        )
+                                    <Text style={styles.eventosDados}>
+                                        <Text>{day} de {monthNames[month - 1]}</Text>
+                                        <Text>
+                                            {data.price % 1 === 0
+                                                ? `R$ ${data.price.toFixed(0)}`
+                                                : `R$ ${data.price.toFixed(2).replace('.', ',')}`}
+                                        </Text>
+                                    </Text>
+                                </View>
+                            );
+                        })
                     }
                 </View >
 

@@ -9,7 +9,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
 import { api } from "../services/api";
-// import { emailLoggado } from './Login';
 
 import { CurrentID } from './Login';
 
@@ -30,26 +29,30 @@ export default function DateAdd({ navigation }) {
   };
 
   const addButton = async (e) => {
-
-    let preco = parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.'))
-
-
-    let day = parseInt(selectedDay);
+    const preco = parseFloat(money.replace('R$ ', '').replace('.', '').replace(',', '.'));
+    const day = parseInt(selectedDay);
+    const year = selectedYear;
+    const formattedDate = `${year}-${selectedMonth}-${day}`;
 
     const data = {
       name,
-      selectedMonth,
-      day,
+      formattedDate,
       preco,
       CurrentID,
     };
 
     const response = await api.post("/date/add", data);
-
     alert(`Success: ${response.data.message || 'Data added successfully!'}`);
-
     navigation.navigate('Calendario');
   };
+
+  const anos = [
+    { label: (new Date().getFullYear()).toString(), value: new Date().getFullYear() },
+    { label: (new Date().getFullYear() + 1).toString(), value: new Date().getFullYear() + 1 },
+    { label: (new Date().getFullYear() + 2).toString(), value: new Date().getFullYear() + 2 },
+    { label: (new Date().getFullYear() + 3).toString(), value: new Date().getFullYear() + 3 },
+    { label: (new Date().getFullYear() + 4).toString(), value: new Date().getFullYear() + 4 },
+  ];
 
   const meses = [
     { label: 'Janeiro', value: 1, abb: 'Jan' },
@@ -149,6 +152,25 @@ export default function DateAdd({ navigation }) {
                 }}
               />
             </View>
+            <Dropdown
+              style={styles.inputDataPreco}
+              data={anos}
+              labelField="label"
+              valueField="value"
+              placeholder="Ano"
+              placeholderStyle={{
+                color: 'white',
+                fontSize: 16,
+              }}
+              selectedTextStyle={{
+                color: 'white',
+                fontSize: 16,
+              }}
+              value={selectedYear}
+              onChange={item => {
+                setSelectedYear(item.value);
+              }}
+            />
             <MaskInput
               style={styles.inputDataPreco}
               value={money}

@@ -1,15 +1,10 @@
 import { LayoutAnimation, StyleSheet } from 'react-native';
 
-
 const lightGreen = '#009443';
-const lightYellow = '#945e00';
 const normalGreen = '#2b3b29';
-const darkerGreen = '#182117';
 const darkGreen = '#0d120c';
 
 export const styles = StyleSheet.create({
-
-
   statusBG: {
     zIndex: 1,
     backgroundColor: darkGreen,
@@ -32,14 +27,14 @@ export const styles = StyleSheet.create({
   voltar: {
     width: 20,
     height: 20,
-    marginTop: 40,
+    marginTop: 55,
     marginLeft: 30,
     transform: 'rotate(180deg)',
   },
 
   header: {
     width: '100%',
-    paddingTop: 50,
+    paddingTop: 30,
     padding: 30,
     display: 'flex',
     alignItems: 'center',

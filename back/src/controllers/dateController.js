@@ -3,56 +3,41 @@ const connection = require('../config/db');
 
 
 async function addDate(request, response) {
+    const formattedDate = request.body.formattedDate; // Use formattedDate diretamente do corpo da requisição
 
-    const query = 'INSERT INTO datas(name, month, day, price, id) VALUES(?, ?, ?, ?, ?);';
+    const query = 'INSERT INTO datas(name, data, price, id) VALUES(?, ?, ?, ?);';
 
-    const params = Array(
+    const params = [
         request.body.name,
-        request.body.selectedMonth,
-        request.body.day,
+        formattedDate,
         request.body.preco,
         request.body.CurrentID,
-    );
-
+    ];
 
     connection.query(query, params, (err, results) => {
-        try {
-            if (results) {
-                response
-                    .status(201)
-                    .json({
-                        success: true,
-                        message: `Sua data foi adicionada!`,
-                        data: results
-                    });
-            } else {
-                response
-                    .status(400)
-                    .json({
-                        success: false,
-                        message: `Não foi possível realizar o cadastro. Verifique os dados informados`,
-                        query: err.sql,
-                        sqlMessage: err.sqlMessage
-                    });
-            }
-        } catch (e) {
-            response.status(400).json({
-                succes: false,
-                message: "Ocorreu um erro. Não foi possível cadastrar usuário!",
+        if (err) {
+            return response.status(400).json({
+                success: false,
+                message: "Não foi possível realizar o cadastro. Verifique os dados informados",
                 query: err.sql,
                 sqlMessage: err.sqlMessage
             });
         }
+
+        response.status(201).json({
+            success: true,
+            message: "Sua data foi adicionada!",
+            data: results
+        });
     });
 }
 
 
 async function selectDate(request, response) {
-    const query = 'SELECT name, month, day, price FROM datas WHERE id = ? AND month >= ?';
+    const query = 'SELECT name, data, price FROM datas WHERE id = ? AND data >= NOW()';
     
     const params = [
         request.query.id,
-        request.query.month
     ];
 
     connection.query(query, params, (err, results) => {
@@ -80,36 +65,35 @@ async function selectDate(request, response) {
 }
 
 async function selectExpiredDate(request, response) {
-    const query = 'SELECT name, month, day, price FROM datas WHERE id = ? AND month < ?';
-    
+    const query = 'SELECT name, data, price FROM datas WHERE id = ? AND data < NOW()';
+
     const params = [
         request.query.id,
-        request.query.month
     ];
 
     connection.query(query, params, (err, results) => {
-        try {
-            if (results) {
-                response.status(200).json({
-                    success: true,
-                    data: results,
-                });
-            } else {
-                response.status(400).json({
-                    success: false,
-                    message: 'Nenhuma data encontrada.',
-                    error: err,
-                });
-            }
-        } catch (e) { 
-            response.status(500).json({
+        if (err) {
+            return response.status(500).json({
                 success: false,
                 message: "Ocorreu um erro ao buscar as datas!",
-                error: e.message,
+                error: err.message,
+            });
+        }
+
+        if (results.length > 0) {
+            response.status(200).json({
+                success: true,
+                data: results,
+            });
+        } else {
+            response.status(404).json({
+                success: false,
+                message: 'Nenhuma data encontrada.',
             });
         }
     });
 }
+
 
 
 

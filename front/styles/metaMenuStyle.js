@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 
   scrollViewContent: {
     flexGrow: 1,
-    paddingBottom: 220,
+    paddingBottom: 30,
   },
 
   Head: {
@@ -32,12 +32,13 @@ export const styles = StyleSheet.create({
     justifyContent: "center", 
     alignItems: "center", 
   },
+
   button: {
     position: "absolute", 
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
     paddingRight: 14,
-    borderRadius: '50%',
+    borderRadius: 50,
     top: 50, 
     left: 20,
     zIndex: 2, 
@@ -48,7 +49,7 @@ export const styles = StyleSheet.create({
     padding: 20,
     display: "flex",
     flexDirection: "column",
-    gap: 20,
+    gap: 10,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -77,7 +78,7 @@ export const styles = StyleSheet.create({
 
   MainText: {
     color: "white",
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "400",
     marginTop: 50,
   },
