@@ -32,7 +32,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Login');
+  const [initialRoute, setInitialRoute] = useState('Account');
   const isFocused = useIsFocused
 
 
@@ -47,7 +47,7 @@ export default function Home() {
           cardStyleInterpolator: ({ current, layouts }) => {
             const translateX = current.progress.interpolate({
               inputRange: [0, 1],
-              outputRange: [layouts.screen.width, 0], // Tela atual desliza para a esquerda
+              outputRange: [layouts.screen.width, 0],
             });
 
             return {
@@ -81,8 +81,8 @@ function HomeScreen({ navigation }) {
     navigation.navigate('Register');
   };
 
-  const loginPress = () => {
-    navigation.navigate('Login');
+  const accountPress = () => {
+    navigation.navigate('Account');
   };
 
   const limitPress = () => {
@@ -124,18 +124,18 @@ function HomeScreen({ navigation }) {
     try {
       const res = await api.get(`/date/select?id=${CurrentID}`);
       if (res.data && res.data.data) {
-        let resposta = res.data.data;
+        console.log('MES PRESENTE', res.data.data);
 
-        resposta.sort((a, b) => {
-          if (a.month === b.month) {
-            return a.day - b.day;
-          }
-          return a.month - b.month;
+        const today = new Date();
+
+        let resposta = res.data.data.sort((a, b) => {
+          const dateA = new Date(a.data);
+          const dateB = new Date(b.data);
+
+          return Math.abs(dateA - today) - Math.abs(dateB - today);
         });
 
         setDatas(resposta);
-
-        console.log('res', res.data.data);
       }
     } catch (error) {
       console.error('Erro ao buscar as datas:', error);
@@ -194,9 +194,10 @@ function HomeScreen({ navigation }) {
                   <Text style={styles.menuText}>Amigos</Text>
                 </View>
               </View>
+              
             </Modal>
 
-            <TouchableOpacity onPress={loginPress}>
+            <TouchableOpacity onPress={accountPress}>
               <MaterialCommunityIcons name="account-circle" size={35} color="white" />
             </TouchableOpacity>
           </View>
@@ -275,25 +276,32 @@ function HomeScreen({ navigation }) {
               <Entypo name="chevron-right" size={30} color="white" />
             </View>
           </TouchableOpacity>
+          {
+            datas.map((data, index) => {
+              const date = new Date(data.data);
+              const day = date.getDate();
+              const month = date.getMonth() + 1;
 
-          {(datas.map((data, index) => (
-            <View
-              key={index}
-              style={[
-                styles.dateContainer
-              ]}
-            >
-              <Text style={[
-                styles.dateName,
-                index === 0 && { color: lightGreen, opacity: 1 }
-              ]}>{data.name}</Text>
-              <Text style={[
-                styles.dateDay,
-                index === 0 && { color: lightGreen, opacity: 1 }
-              ]}>{data.day} de {monthNames[data.month - 1]}</Text>
-            </View>
-          ))
-          )}
+              return (
+                <View
+                  key={index}
+                  style={[
+                    styles.dateContainer,
+                    index === 0 && { borderColor: lightGreen }
+                  ]}
+                >
+                  <Text style={[
+                    styles.dateName,
+                    index === 0 && { color: lightGreen, opacity: 1 }
+                  ]}>{data.name}</Text>
+                  <Text style={[
+                    styles.dateDay,
+                    index === 0 && { color: lightGreen, opacity: 1 }
+                  ]}>{day} de {monthNames[month - 1]}</Text>
+                </View>
+              );
+            })
+          }
 
           <StatusBar style="light" />
 

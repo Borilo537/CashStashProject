@@ -265,6 +265,10 @@ export const styles = StyleSheet.create({
   },
 
   dateContainer: {
+    borderWidth: 2,
+    borderColor: '#80827f',
+    borderRadius: 10,
+    padding: 15,
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
@@ -277,7 +281,7 @@ export const styles = StyleSheet.create({
   dateName: {
     color: 'white',
     height: '100%',
-    fontSize: 16,
+    fontSize: 18,
     opacity: 0.5,
     fontWeight: '600',
     display: 'flex',

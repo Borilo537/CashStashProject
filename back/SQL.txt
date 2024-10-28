@@ -30,8 +30,7 @@
 	CREATE TABLE datas (
 		id INT,
 		name VARCHAR(255) NOT NULL,
-		month INT NOT NULL,
-		day INT NOT NULL,
+		data DATE,
 		price FLOAT NOT NULL
 	);
 

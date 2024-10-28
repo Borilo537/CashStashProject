@@ -1,6 +1,6 @@
 import { Button, LayoutAnimation, StyleSheet } from 'react-native';
 
-
+const lighterGreen = '#00bf50';
 const lightGreen = '#009443';
 const lightYellow = '#945e00';
 const normalGreen = '#2b3b29';
@@ -9,6 +9,25 @@ const darkGreen = '#0d120c';
 
 export const styles = StyleSheet.create({
 
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    paddingBottom: 5,
+    borderColor: 'white' 
+    },
+
+  column: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 5,
+    alignItems: 'start',
+    width: '100%',
+  },
 
   statusBG: {
     zIndex: 1,
@@ -26,7 +45,7 @@ export const styles = StyleSheet.create({
 
   scrollViewContent: {
     flexGrow: 1,
-    paddingBottom: 220,
+    paddingBottom: 20,
   },
 
   voltar: {
@@ -38,19 +57,23 @@ export const styles = StyleSheet.create({
 
   Main: {
     width: '100%',
-    height: 600,
     paddingTop: 20,
     padding: 20,
     marginTop: 40,
     display: 'flex',
     flexDirection: 'column',
-    gap: 30,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
 
+  TopText: {
+    color: lighterGreen,
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+
   profileContainer: {
-    gap: 20,
+    gap: 25,
     marginBottom: 40,
     display: 'flex',
     flexDirection: 'column',
@@ -58,29 +81,41 @@ export const styles = StyleSheet.create({
   },
 
   profileImage: {
-    width: 170,
-    height: 170,
+    width: 140,
+    height: 140,
+  },
+
+  info: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    gap: 25,
+    backgroundColor: lightGreen,
+    padding: 20,
+  },
+
+  Label: {
+    color: 'white',
+    fontSize: 15,
+    opacity: 0.7,
   },
 
   MainText: {
     color: 'white',
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 25,
+    fontWeight: '500',
   },
 
   MainButton: {
     backgroundColor: 'red',
-    padding: 20,
+    padding: 10,
     color: 'white',
     borderRadius: 10,
-    fontSize: 25,
+    fontSize: 15,
     fontWeight: '500',
-    marginTop: 80,
+    marginTop: 'auto',
   },
 
 
-
-
-  
 
 });

@@ -123,10 +123,9 @@ export default function Calendario({ navigation }) {
                     }
                     {
                         datas.map((data, index) => {
-                            const date = new Date(data.data); // Converter string de data para objeto Date
+                            const date = new Date(data.data);
                             const day = date.getDate();
                             const month = date.getMonth() + 1;
-                            const year = date.getFullYear();
 
                             return (
                                 <View
