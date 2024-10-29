@@ -4,6 +4,7 @@ import {
   View,
   TextInput,
   Image,
+  Button,
   TouchableOpacity,
   ImageBackground,
   ScrollView,
@@ -12,8 +13,25 @@ import { styles } from "../styles/accountStyle";
 import React, { useEffect, useState } from "react";
 import { api } from "../services/api";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function MetaAdd({ navigation }) {
+  const [image, setImage] = useState('../assets/profile.png');
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   const homePress = () => {
     navigation.navigate("Home");
@@ -35,10 +53,12 @@ export default function MetaAdd({ navigation }) {
 
           <View style={styles.profileContainer}>
             <Text style={styles.TopText}>Seu Perfil</Text>
-            <ImageBackground
-              source={require("../assets/profile.png")}
-              style={styles.profileImage}
-            ></ImageBackground>
+            <TouchableOpacity onPress={pickImage}>
+              {image && <Image
+                source={{ uri: image }}
+                style={styles.profileImage}
+              />}
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.info}>
@@ -53,6 +73,13 @@ export default function MetaAdd({ navigation }) {
             <Text style={styles.Label}>Email</Text>
             <View style={styles.row}>
               <Text style={styles.MainText}>a@a.com</Text>
+              <FontAwesome5 name="edit" size={24} color="white" />
+            </View>
+          </View>
+          <View style={styles.column}>
+            <Text style={styles.Label}>Senha</Text>
+            <View style={styles.row}>
+              <Text style={styles.MainText}>******</Text>
               <FontAwesome5 name="edit" size={24} color="white" />
             </View>
           </View>

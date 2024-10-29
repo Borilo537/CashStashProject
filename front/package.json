@@ -34,7 +34,8 @@
     "react-native-mask-input": "^1.2.3",
     "react-native-modal": "^13.0.1",
     "react-native-web": "~0.19.6",
-    "typescript": "~5.3.3"
+    "typescript": "~5.3.3",
+    "expo-image-picker": "~15.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -81,8 +81,10 @@ export const styles = StyleSheet.create({
   },
 
   profileImage: {
-    width: 140,
-    height: 140,
+    width: 160,
+    height: 160,
+    borderRadius: 100,
+    backgroundColor: normalGreen
   },
 
   info: {
@@ -90,7 +92,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     gap: 25,
-    backgroundColor: lightGreen,
     padding: 20,
   },
 
