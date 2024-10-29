@@ -1,9 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { lighterGreen, lightGreen, normalGreen, darkGreen, darkerGreen } from './colors';
 
-const lightGreen = '#009443';
-const normalGreen = '#2b3b29';
-const darkerGreen = '#182117';
-const darkGreen = '#0d120c';
+
 
 export const styles = StyleSheet.create({
 
@@ -19,7 +17,7 @@ export const styles = StyleSheet.create({
 
   body: {
     flex: 1,
-    backgroundColor: darkGreen,
+    backgroundColor: darkerGreen,
   },
 
   scrollViewContent: {

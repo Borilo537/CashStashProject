@@ -1,11 +1,12 @@
 import { Button, LayoutAnimation, StyleSheet } from 'react-native';
 
-const lighterGreen = '#00bf50';
+const lighterGreen = '#06D001';
 const lightGreen = '#009443';
 const lightYellow = '#945e00';
 const normalGreen = '#2b3b29';
 const darkerGreen = '#182117';
 const darkGreen = '#0d120c';
+
 
 export const styles = StyleSheet.create({
 
@@ -64,17 +65,18 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
+
   },
 
   TopText: {
     color: lighterGreen,
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: 'bold',
   },
 
   profileContainer: {
     gap: 25,
-    marginBottom: 40,
+    marginBottom: 30,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -84,15 +86,40 @@ export const styles = StyleSheet.create({
     width: 160,
     height: 160,
     borderRadius: 100,
-    backgroundColor: normalGreen
+    backgroundColor: darkGreen,
+    borderWidth: 3,
+    borderColor: darkerGreen,
+  },
+
+  selfBlur: {
+    width: '100%',
+    height: 400,
+    position: 'absolute',
+    zIndex: -1,
+  },
+
+  element: {
+    width: 190,
+    height: 190,
+    backgroundColor: lightGreen,
+    zIndex: -2,
+    borderRadius: 100,
+    position: 'absolute',
+    top: 60,
+    alignSelf: 'center',
   },
 
   info: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    height: 550,
     gap: 25,
-    padding: 20,
+    padding: 25,
+    paddingTop: 30,
+    borderTopColor: 'white',
+    borderTopWidth: 1,
+    backgroundColor: 'none',
   },
 
   Label: {
@@ -107,14 +134,22 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
   },
 
-  MainButton: {
-    backgroundColor: 'red',
-    padding: 10,
+  SaveButton: {
+    padding: 15,
     color: 'white',
     borderRadius: 10,
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: '500',
     marginTop: 'auto',
+  },
+
+  DeleteButton: {
+    backgroundColor: 'red',
+    padding: 15,
+    color: 'white',
+    borderRadius: 10,
+    fontSize: 20,
+    fontWeight: '500',
   },
 
 

@@ -12,11 +12,14 @@ import {
 import { styles } from "../styles/accountStyle";
 import React, { useEffect, useState } from "react";
 import { api } from "../services/api";
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import * as ImagePicker from 'expo-image-picker';
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
+import { BlurView } from "expo-blur";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function MetaAdd({ navigation }) {
-  const [image, setImage] = useState('../assets/profile.png');
+  const [image, setImage] = useState("../assets/profile.png");
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -38,30 +41,42 @@ export default function MetaAdd({ navigation }) {
     tion.navigate("Home");
   };
 
-  const lighterGreen = '#00bf50';
-  const lightGreen = '#009443';
-
+  const lighterGreen = "#73EC8B";
+  const lightGreen = "#9BEC00";
 
   return (
     <View style={styles.body}>
       <View style={styles.statusBG}></View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.Main}>
-          <TouchableOpacity onPress={homePress} style={{ alignSelf: 'flex-start' }}>
-            <ImageBackground source={require('../assets/arrow.png')} style={styles.voltar}></ImageBackground>
+          <TouchableOpacity
+            onPress={homePress}
+            style={{ alignSelf: "flex-start" }}
+          >
+            <ImageBackground
+              source={require("../assets/arrow.png")}
+              style={styles.voltar}
+            ></ImageBackground>
           </TouchableOpacity>
 
           <View style={styles.profileContainer}>
             <Text style={styles.TopText}>Seu Perfil</Text>
             <TouchableOpacity onPress={pickImage}>
-              {image && <Image
-                source={{ uri: image }}
-                style={styles.profileImage}
-              />}
+              {image && (
+                <Image source={{ uri: image }} style={styles.profileImage} />
+              )}
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.info}>
+
+        <BlurView
+          tint="systemMaterialDark"
+          intensity={100}
+          style={styles.selfBlur}
+        ></BlurView>
+        <View style={styles.element}></View>
+
+        <BlurView tint="dark" intensity={80} style={styles.info}>
           <View style={styles.column}>
             <Text style={styles.Label}>Nome de Usuário</Text>
             <View style={styles.row}>
@@ -84,13 +99,16 @@ export default function MetaAdd({ navigation }) {
             </View>
           </View>
 
-
-          <Text style={styles.MainButton}>Deletar Conta</Text>
-        </View>
-
-
-
-
+          <LinearGradient
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            colors={[lighterGreen, lightGreen]}
+            style={styles.SaveButton}
+          >
+            Salvar Alterações
+          </LinearGradient>
+          <Text style={styles.DeleteButton}>Deletar Conta</Text>
+        </BlurView>
 
         <StatusBar style="light" />
       </ScrollView>

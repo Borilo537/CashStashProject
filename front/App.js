@@ -32,7 +32,7 @@ const Stack = createStackNavigator();
 
 
 export default function Home() {
-  const [initialRoute, setInitialRoute] = useState('Account');
+  const [initialRoute, setInitialRoute] = useState('Home');
   const isFocused = useIsFocused
 
 
@@ -150,14 +150,7 @@ function HomeScreen({ navigation }) {
 
     <View style={styles.body}>
 
-      <View style={{
-        zIndex: 1,
-        backgroundColor: lightGreen,
-        position: 'absolute',
-        width: '100%',
-        height: 32,
-        top: 0,
-      }}></View>
+      <View style={styles.statusBG}></View>
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
 

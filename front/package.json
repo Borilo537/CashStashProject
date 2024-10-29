@@ -19,6 +19,7 @@
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "expo": "~51.0.2",
+    "expo-image-picker": "~15.0.7",
     "expo-linear-gradient": "~13.0.2",
     "expo-status-bar": "~1.12.1",
     "express": "^4.19.2",
@@ -35,7 +36,8 @@
     "react-native-modal": "^13.0.1",
     "react-native-web": "~0.19.6",
     "typescript": "~5.3.3",
-    "expo-image-picker": "~15.0.7"
+    "expo-file-system": "~17.0.1",
+    "expo-blur": "~13.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
