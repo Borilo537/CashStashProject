@@ -41,9 +41,6 @@ export default function MetaAdd({ navigation }) {
     tion.navigate("Home");
   };
 
-  const lighterGreen = "#73EC8B";
-  const lightGreen = "#9BEC00";
-
   return (
     <View style={styles.body}>
       <View style={styles.statusBG}></View>
@@ -99,14 +96,7 @@ export default function MetaAdd({ navigation }) {
             </View>
           </View>
 
-          <LinearGradient
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            colors={[lighterGreen, lightGreen]}
-            style={styles.SaveButton}
-          >
-            Salvar Alterações
-          </LinearGradient>
+          <Text style={styles.SaveButton}>Salvar Informações</Text>
           <Text style={styles.DeleteButton}>Deletar Conta</Text>
         </BlurView>
 

@@ -135,6 +135,7 @@ export const styles = StyleSheet.create({
   },
 
   SaveButton: {
+    backgroundColor: lightGreen,
     padding: 15,
     color: 'white',
     borderRadius: 10,
