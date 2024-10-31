@@ -10,6 +10,53 @@ const darkGreen = '#0d120c';
 
 export const styles = StyleSheet.create({
 
+  ModalBG: {
+    backgroundColor: 'black',
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0.5,
+  },
+
+  ModalBody: {
+    zIndex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 'auto',
+    width: '100%',
+    height: '100%',
+    alignItems: 'flex-end',
+    padding: 20,
+  },
+
+  ModalAlert: {
+    backgroundColor: normalGreen,
+    height: 250,
+    width: '100%',
+    borderRadius: 20,
+    padding: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    gap: 10,
+  },
+
+  alertText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 25,
+  },
+
+  inputModal: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 25,
+  },
+
   row: {
     display: 'flex',
     flexDirection: 'row',
@@ -124,7 +171,7 @@ export const styles = StyleSheet.create({
 
   Label: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 12,
     opacity: 0.7,
   },
 

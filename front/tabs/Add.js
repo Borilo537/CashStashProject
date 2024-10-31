@@ -105,32 +105,6 @@ export default function Add({ navigation }) {
                         <View style={styles.ModalBody}>
                             <View style={styles.ModalAlert}>
                                 <Text style={styles.alertText}>Este gasto excede seu limite, deseja continuar?</Text>
-                                <View style={styles.buttonContainer}>
-                                    <Text style={styles.button}
-                                        onPress={async (e) => {
-                                            setIsModalVisible(false)
-                                            alert('Gasto Adicionado!')
-
-                                            e.preventDefault();
-                                            const data = {
-                                                gastado,
-                                                CurrentID
-                                            };
-
-                                            await api.post("/gastos/update", data);
-
-                                            api.get(`/gastos/select?id=${CurrentID}`).then((res) => {
-                                                console.log('VAPO', res.data.data[0].gastado)
-                                                setGasto(res.data.data[0].gastado);
-                                            })
-
-                                            setGastado('')
-
-                                        }}>Continuar</Text>
-                                    <Text style={styles.button2}
-                                        onPress={() => setIsModalVisible(false)}
-                                    >Cancelar</Text>
-                                </View>
                             </View>
                         </View>
                         <View style={styles.ModalBG}>

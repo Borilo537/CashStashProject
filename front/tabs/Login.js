@@ -24,36 +24,41 @@ export default function Login({ navigation }) {
 
   const handleSubmit = async function () {
     console.log('email:', email, 'senha:', password);
-  
+
     const data = {
       email,
       password,
     };
-  
+
     const response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: { "Content-type": "application/json;charset=UTF-8" },
       body: JSON.stringify(data),
     });
-  
+
     let content = await response.json();
-  
-    if (content.success) {
-      const idResponse = await api.get(`/auth/idCheck?email=${email}`);
-      const fetchedId = idResponse.data.data[0].id;
-      console.log('puxando ID', fetchedId);
-      setId(fetchedId);
-      
-      emailLoggado = email;
-      CurrentID = fetchedId;
-  
-      alert(content.message);
-      navigation.navigate('Home');
-    } else {
-      console.log('ERROOO');
-      alert(content.message);
+
+    try {
+      if (content.success) {
+        const idResponse = await api.get(`/auth/idCheck?email=${email}`);
+        const fetchedId = idResponse.data.data[0].id;
+        console.log('puxando ID', fetchedId);
+        setId(fetchedId);
+
+        emailLoggado = email;
+        CurrentID = fetchedId;
+
+        alert(content.message);
+        navigation.navigate('Home');
+      } else {
+        console.log('ERROOO');
+        alert(content.message);
+      }
+    } catch (error) {
+      console.error('Erro ao obter ID:', error);
+      alert('Ocorreu um erro ao processar sua solicitação. Tente novamente.');
     }
-  };
+  }
 
   return (
 

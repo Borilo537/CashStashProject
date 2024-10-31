@@ -35,8 +35,6 @@ export default function Home() {
   const [initialRoute, setInitialRoute] = useState('Login');
   const isFocused = useIsFocused
 
-
-
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -158,7 +156,6 @@ function HomeScreen({ navigation }) {
           <View style={styles.topContentIcons}>
 
             <Entypo name="menu" size={35} color="white" onPress={() => setIsModalVisible(true)} />
-
 
             <Modal
               visible={isModalVisible}

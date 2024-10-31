@@ -117,10 +117,49 @@ async function createGasto(request, response) {
     });
 }
 
+async function accountInfo(request, response) {
+    const params = [
+        request.query.id,
+    ];
+
+    const query = "SELECT * FROM user_account WHERE id = ?";
+
+    connection.query(query, params, (err, results) => {
+        try {
+            if (results && results.length > 0) {
+                response
+                    .status(201)
+                    .json({
+                        success: true,
+                        message: `Sucesso! id coletado!`,
+                        data: results
+                    });
+            } else {
+                response
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: `Nenhum ID encontrado para o email fornecido.`
+                    });
+            }
+        } catch (e) { 
+            response.status(400).json({
+                success: false,
+                message: "Ocorreu um erro. Não foi possível coletar o ID!",
+                query: err ? err.sql : '',
+                sqlMessage: err ? err.sqlMessage : ''
+            });
+        }
+    });
+}
+
+
 
 
 module.exports = {
     storeUser,
     createLimit,
-    createGasto
+    createGasto,
+    accountInfo
+
 }

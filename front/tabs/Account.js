@@ -8,18 +8,30 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  Modal,
 } from "react-native";
 import { styles } from "../styles/accountStyle";
 import React, { useEffect, useState } from "react";
 import { api } from "../services/api";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from "expo-file-system";
 import { BlurView } from "expo-blur";
-import { LinearGradient } from "expo-linear-gradient";
+import { useIsFocused } from '@react-navigation/native';
+import { CurrentID } from './Login';
 
 export default function MetaAdd({ navigation }) {
+  const isFocused = useIsFocused();
   const [image, setImage] = useState("../assets/profile.png");
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  useEffect(() => {
+    api.get(`/user/accountInfo?id=${CurrentID}`).then((res) => {
+      setName(res.data.data[0].name);
+      setEmail(res.data.data[0].email);
+    })
+  }, [CurrentID, isFocused])
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -46,6 +58,32 @@ export default function MetaAdd({ navigation }) {
       <View style={styles.statusBG}></View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.Main}>
+          <Modal
+            visible={isModalVisible}
+            onRequestClose={() => setIsModalVisible(false)}
+            transparent={true}
+            animationType="fade"
+          >
+
+            <View style={styles.ModalBody}>
+              <View style={styles.ModalAlert}>
+                <Text style={styles.alertText}>Digite seu novo nome de usuário</Text>
+                <TextInput
+                  style={styles.inputModal}
+                  placeholder='Novo Nome de Usuário'
+                  placeholderTextColor={'rgba(255, 255, 255, 0.8)'}
+                  value={name}
+                  onChangeText={setName}
+                />
+              </View>
+            </View>
+            <View style={styles.ModalBG}>
+
+            </View>
+
+
+          </Modal>
+
           <TouchableOpacity
             onPress={homePress}
             style={{ alignSelf: "flex-start" }}
@@ -77,15 +115,16 @@ export default function MetaAdd({ navigation }) {
           <View style={styles.column}>
             <Text style={styles.Label}>Nome de Usuário</Text>
             <View style={styles.row}>
-              <Text style={styles.MainText}>Bob</Text>
-              <FontAwesome5 name="edit" size={24} color="white" />
+              <Text style={styles.MainText}>{name}</Text>
+              <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+                <FontAwesome5 name="edit" size={24} color="white" />
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.column}>
             <Text style={styles.Label}>Email</Text>
             <View style={styles.row}>
-              <Text style={styles.MainText}>a@a.com</Text>
-              <FontAwesome5 name="edit" size={24} color="white" />
+              <Text style={styles.MainText}>{email}</Text>
             </View>
           </View>
           <View style={styles.column}>
