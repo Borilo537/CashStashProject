@@ -9,6 +9,7 @@ import {
   ImageBackground,
   ScrollView,
   Modal,
+  SafeAreaView,
 } from "react-native";
 import { styles } from "../styles/accountStyle";
 import React, { useEffect, useState } from "react";
@@ -26,12 +27,12 @@ export default function MetaAdd({ navigation }) {
   const [email, setEmail] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false)
 
-  useEffect(() => {
-    api.get(`/user/accountInfo?id=${CurrentID}`).then((res) => {
-      setName(res.data.data[0].name);
-      setEmail(res.data.data[0].email);
-    })
-  }, [CurrentID, isFocused])
+  // useEffect(() => {
+  //   api.get(`/user/accountInfo?id=${CurrentID}`).then((res) => {
+  //     setName(res.data.data[0].name);
+  //     setEmail(res.data.data[0].email);
+  //   })
+  // }, [CurrentID, isFocused])
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -54,7 +55,7 @@ export default function MetaAdd({ navigation }) {
   };
 
   return (
-    <View style={styles.body}>
+    <SafeAreaView style={styles.body}>
       <View style={styles.statusBG}></View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.Main}>
@@ -66,20 +67,19 @@ export default function MetaAdd({ navigation }) {
           >
 
             <View style={styles.ModalBody}>
+              <TouchableOpacity onPress={() => setIsModalVisible(false)} style={styles.outInput}></TouchableOpacity>
               <View style={styles.ModalAlert}>
                 <Text style={styles.alertText}>Digite seu novo nome de usuário</Text>
                 <TextInput
                   style={styles.inputModal}
                   placeholder='Novo Nome de Usuário'
                   placeholderTextColor={'rgba(255, 255, 255, 0.8)'}
-                  value={name}
                   onChangeText={setName}
                 />
               </View>
+              <TouchableOpacity onPress={() => setIsModalVisible(false)} style={styles.outInput}></TouchableOpacity>
             </View>
-            <View style={styles.ModalBG}>
-
-            </View>
+            <BlurView experimentalBlurMethod='dimezisBlurView' tint="dark" intensity={30} style={{ position: 'absolute', height:'100%', width:'100%',}} />
 
 
           </Modal>
@@ -105,9 +105,10 @@ export default function MetaAdd({ navigation }) {
         </View>
 
         <BlurView
-          tint="systemMaterialDark"
+          tint="dark"
           intensity={100}
           style={styles.selfBlur}
+          experimentalBlurMethod='dimezisBlurView'
         ></BlurView>
         <View style={styles.element}></View>
 
@@ -141,6 +142,6 @@ export default function MetaAdd({ navigation }) {
 
         <StatusBar style="light" />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

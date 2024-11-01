@@ -11,18 +11,16 @@ const darkGreen = '#0d120c';
 export const styles = StyleSheet.create({
 
   ModalBG: {
-    backgroundColor: 'black',
     flex: 1,
     position: 'absolute',
     top: 0,
-    zIndex: 0,
+    zIndex: 1,
     width: '100%',
     height: '100%',
-    opacity: 0.5,
   },
 
   ModalBody: {
-    zIndex: 1,
+    zIndex: 2,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -31,6 +29,12 @@ export const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'flex-end',
     padding: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+
+  outInput: {
+    height: '100%',
+    width: '100%',
   },
 
   ModalAlert: {
@@ -38,11 +42,11 @@ export const styles = StyleSheet.create({
     height: 250,
     width: '100%',
     borderRadius: 20,
-    padding: 20,
+    padding: 30,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    gap: 10,
+    gap: 20,
   },
 
   alertText: {
@@ -52,9 +56,14 @@ export const styles = StyleSheet.create({
   },
 
   inputModal: {
-    textAlign: 'center',
+    textAlign: 'start',
     color: 'white',
-    fontSize: 25,
+    fontSize: 20,
+    backgroundColor: darkerGreen,
+    padding: 15,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'white',
   },
 
   row: {
@@ -153,6 +162,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     position: 'absolute',
     top: 60,
+    opacity: 0.7,
     alignSelf: 'center',
   },
 
