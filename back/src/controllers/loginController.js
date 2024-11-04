@@ -60,7 +60,7 @@ async function login(request, response) {
         if (results.length === 0) {
             return response.status(400).json({
                 success: false,
-                message: "Insira seus dados!",
+                message: "Resultados Vazios",
             });
         }
 

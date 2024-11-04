@@ -69,7 +69,7 @@ export default function Register({ navigation }) {
 
         <View style={styles.form}>
           <View style={styles.input}>
-            <Text style={styles.inputLabel}>Nome</Text>
+            <Text style={styles.inputLabel}>Nome de Usuário</Text>
             <TextInput
               style={styles.inputControl}
               placeholder='Seu Nome'

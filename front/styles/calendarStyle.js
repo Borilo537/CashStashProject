@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 120,
     backgroundColor: normalGreen,
-    borderRadius: 10,
+    borderRadius: "10",
   },
 
   inputControl: {
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
     color: 'white',
     padding: 9,
     paddingLeft: 15,
-    borderRadius: 10,
+    borderRadius: "10",
     fontSize: 15,
   },
 
@@ -132,7 +132,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     marginRight: -22,
-    borderRadius: '50%',
+    borderRadius: 70,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'

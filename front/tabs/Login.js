@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
       password,
     };
 
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch('http://192.168.15.114:3000/api/auth/login', {
       method: 'POST',
       headers: { "Content-type": "application/json;charset=UTF-8" },
       body: JSON.stringify(data),
@@ -57,6 +57,7 @@ export default function Login({ navigation }) {
     } catch (error) {
       console.error('Erro ao obter ID:', error);
       alert('Ocorreu um erro ao processar sua solicitação. Tente novamente.');
+      throw error;
     }
   }
 
@@ -95,7 +96,8 @@ export default function Login({ navigation }) {
               placeholder='Digite seu e-mail'
               placeholderTextColor={'white'}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChangeText={setEmail}
+              autoCapitalize='none'
             />
 
           </View>
@@ -109,7 +111,8 @@ export default function Login({ navigation }) {
               placeholderTextColor={'white'}
               value={password}
               secureTextEntry
-              onChange={(e) => setPassword(e.target.value)}
+              onChangeText={setPassword} 
+              autoCapitalize='none'
             />
             <Text style={styles.passwordForget}>Esqueci minha senha</Text>
 
@@ -153,4 +156,3 @@ export const useEmail = () => {
 
 export { emailLoggado }
 export { CurrentID }
-
