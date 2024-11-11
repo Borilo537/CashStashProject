@@ -20,6 +20,7 @@ import { BlurView } from "expo-blur";
 import { useIsFocused } from '@react-navigation/native';
 import { CurrentID } from './Login';
 
+
 export default function MetaAdd({ navigation }) {
   const isFocused = useIsFocused();
   const [image, setImage] = useState("../assets/profile.png");

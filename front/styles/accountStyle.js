@@ -1,4 +1,5 @@
 import { Button, LayoutAnimation, StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
 
 const lighterGreen = '#06D001';
 const lightGreen = '#009443';
