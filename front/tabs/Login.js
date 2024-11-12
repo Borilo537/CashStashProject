@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
       password,
     };
 
-    const response = await fetch('http://192.168.15.114:3000/api/auth/login', {
+    const response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: { "Content-type": "application/json;charset=UTF-8" },
       body: JSON.stringify(data),
