@@ -7,6 +7,8 @@ const lightYellow = '#945e00';
 const normalGreen = '#2b3b29';
 const darkerGreen = '#182117';
 const darkGreen = '#0d120c';
+const ModalBGcolor = '#161f18';
+const ModalInputcolor = '#223026';
 
 
 export const styles = StyleSheet.create({
@@ -30,7 +32,7 @@ export const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'flex-end',
     padding: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    backgroundColor: 'rgba(0, 0, 0, 0.6)'
   },
 
   outInput: {
@@ -39,8 +41,18 @@ export const styles = StyleSheet.create({
   },
 
   ModalAlert: {
-    backgroundColor: normalGreen,
-    height: 250,
+    backgroundColor: ModalBGcolor,
+    width: '100%',
+    borderRadius: 20,
+    padding: 30,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    gap: 20,
+  },
+
+  ModalAlertRed: {
+    backgroundColor: '#381111',
     width: '100%',
     borderRadius: 20,
     padding: 30,
@@ -54,17 +66,48 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontSize: 25,
+    fontFamily: 'Inter_400Regular',
+    marginBottom: 10,
   },
 
   inputModal: {
     textAlign: 'start',
     color: 'white',
-    fontSize: 20,
-    backgroundColor: darkerGreen,
+    fontSize: 16,
+    backgroundColor: ModalInputcolor,
     padding: 15,
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: 'white',
+    fontFamily: 'Inter_400Regular'
+  },
+
+  inputModalRed: {
+    textAlign: 'start',
+    color: 'white',
+    fontSize: 16,
+    backgroundColor: '#612222',
+    padding: 15,
+    borderRadius: 10,
+    fontFamily: 'Inter_400Regular'
+  },
+  
+  ModalButton: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 18,
+    backgroundColor: lightGreen,
+    padding: 15,
+    borderRadius: 10,
+    fontFamily: 'Inter_500Medium'
+  },
+
+  ModalButtonRed: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 18,
+    backgroundColor: '#c73232',
+    padding: 15,
+    borderRadius: 10,
+    fontFamily: 'Inter_500Medium'
   },
 
   row: {
@@ -76,8 +119,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     paddingBottom: 5,
-    borderColor: 'white' 
-    },
+    borderColor: 'white'
+  },
 
   column: {
     display: 'flex',
@@ -128,7 +171,7 @@ export const styles = StyleSheet.create({
   TopText: {
     color: lighterGreen,
     fontSize: 25,
-    fontWeight: 'bold',
+    fontFamily: 'Inter_400Regular'
   },
 
   profileContainer: {
@@ -184,12 +227,13 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     opacity: 0.7,
+    fontFamily: 'Inter_400Regular'
   },
 
   MainText: {
     color: 'white',
-    fontSize: 25,
-    fontWeight: '500',
+    fontSize: 22,
+    fontFamily: 'Inter_500Medium'
   },
 
   SaveButton: {
@@ -200,6 +244,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     marginTop: 'auto',
+    fontFamily: 'Inter_500Medium'
   },
 
   DeleteButton: {
@@ -209,6 +254,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 20,
     fontWeight: '500',
+    fontFamily: 'Inter_500Medium'
   },
 
 

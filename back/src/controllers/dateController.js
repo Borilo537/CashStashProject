@@ -34,7 +34,7 @@ async function addDate(request, response) {
 
 
 async function selectDate(request, response) {
-    const query = 'SELECT name, data, price FROM datas WHERE id = ? AND data >= NOW()';
+    const query = 'SELECT name, data, price FROM datas WHERE id = ? AND data >=  NOW()';
     
     const params = [
         request.query.id,
